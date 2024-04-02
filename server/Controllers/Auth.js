@@ -113,9 +113,7 @@ exports.signup = async (req, res) => {
     }
 
     // find most recent otp stored for the user
-const recentOTP = await OTP.
-
-
+    // const recentOTP = await OTP.
 
     // validate otp
   } catch (error) {}
