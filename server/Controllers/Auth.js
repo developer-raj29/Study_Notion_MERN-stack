@@ -205,7 +205,7 @@ exports.login = async (req, res) => {
       const payload = {
         email: user.email,
         id: user._id,
-        role: user.role,
+        accountType: user.accountType,
       };
 
       const token = JWT.sign(payload, process.env.JWT_SECRET, {
@@ -244,6 +244,29 @@ exports.login = async (req, res) => {
 };
 
 // change password
-exports.changePassword = async (req, res)=>{
-    
-}
+exports.changePassword = async (req, res) => {
+  // get data from req body
+  const { oldpassword, newpassword, confirmPassword } = req.body;
+
+  // get old password, new password , confrim new password
+  //  validation
+  if (!oldpassword || !newpassword || !confirmPassword) {
+    return res.status(403).json({
+      success: false,
+      message: "Please Fill All fields are required, Please try again",
+    });
+  }
+
+  // update password in DB
+  const user = await User.findOneAndUpdate(
+    { email: req.user.email },
+    { password: req.user.password },
+    { new: true }
+  );
+
+  user.save();
+
+  // send mail - password updated
+
+  // return res
+};
