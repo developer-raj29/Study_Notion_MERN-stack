@@ -28,7 +28,6 @@ exports.auth = async (req, res, next) => {
 
       //   const user = await User.findById(decoded.id);
       req.user = decoded;
-      next();
     } catch (err) {
       // varification issue message
       res.status(401).json({
@@ -37,6 +36,7 @@ exports.auth = async (req, res, next) => {
         error: err.message,
       });
     }
+    next();
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -47,8 +47,8 @@ exports.auth = async (req, res, next) => {
   }
 };
 
-// Isstudent
-exports.Isstudent = async (req, res, next) => {
+// IsStudent
+exports.IsStudent = async (req, res, next) => {
   try {
     if (req.user.accoutType !== "Student") {
       return res.status(401).json({
