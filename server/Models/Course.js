@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const CourseSchema = new mongoose.Schema({
   courseName: {
     type: String,
+    trim: true,
   },
   courseDescription: {
     type: String,
+    trim: true,
   },
   instructor: {
     type: mongoose.Schema.Types.ObjectId,
@@ -14,6 +16,7 @@ const CourseSchema = new mongoose.Schema({
   },
   whatYouWillLearn: {
     type: String,
+    trim: true,
   },
   courseContent: [
     {

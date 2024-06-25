@@ -23,6 +23,7 @@ const UserSchema = new mongoose.Schema({
   accoutType: {
     type: String,
     enum: ["Admin", "Student", "Instructor"],
+    required: true,
   },
   additionalDetails: {
     type: mongoose.Schema.Types.ObjectId,

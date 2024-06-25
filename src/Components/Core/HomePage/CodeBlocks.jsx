@@ -58,7 +58,7 @@ const CodeBlocks = ({
           className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codeColor} pr-2`}
         >
           <TypeAnimation
-            sequence={[codeblock, 5000, ""]}
+            sequence={[codeblock, 3000, ""]}
             repeat={Infinity}
             cursor={true}
             style={{
