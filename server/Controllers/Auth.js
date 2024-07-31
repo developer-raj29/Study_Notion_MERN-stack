@@ -3,10 +3,13 @@ const OTP = require("../Models/OTP");
 const bcrypt = require("bcrypt");
 const otpGenerator = require("otp-generator");
 const JWT = require("jsonwebtoken");
+const mailSender = require("../Utils/MailSender");
+const { passwordUpdate } = require("../mail/templates/passwordUpdate");
+const Profile = require("../Models/Profile");
 
 require("dotenv").config();
 
-// send otp
+// Send OTP For Email Verification
 exports.sendOTP = async (req, res) => {
   try {
     // fetch email from req body
@@ -66,7 +69,7 @@ exports.sendOTP = async (req, res) => {
   }
 };
 
-// Signup
+// Signup Controller for Registration
 
 exports.signup = async (req, res) => {
   try {

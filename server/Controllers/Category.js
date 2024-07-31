@@ -57,7 +57,7 @@
 //   }
 // };
 
-const { Mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const Category = require("../Models/Category");
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -123,9 +123,9 @@ exports.showAllCategories = async (req, res) => {
 };
 
 //categoryPageDetails
-
 exports.categoryPageDetails = async (req, res) => {
   try {
+    // get category Id
     const { categoryId } = req.body;
 
     console.log("PRINTING CATEGORY ID: ", categoryId);
@@ -139,7 +139,7 @@ exports.categoryPageDetails = async (req, res) => {
       })
       .exec();
 
-    //console.log("SELECTED COURSE", selectedCategory)
+    console.log("SELECTED COURSE", selectedCategory);
 
     // Handle the case when the category is not found
     if (!selectedCategory) {
@@ -201,6 +201,7 @@ exports.categoryPageDetails = async (req, res) => {
         mostSellingCourses,
       },
     });
+    s;
   } catch (error) {
     return res.status(500).json({
       success: false,
