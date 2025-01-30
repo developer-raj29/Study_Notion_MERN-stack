@@ -10,6 +10,8 @@ import { TimelineSection } from "../Components/Core/HomePage/TimelineSection";
 import LearningLanguageSection from "../Components/Core/HomePage/LearningLanguageSection";
 import ExploreMore from "../Components/Core/HomePage/ExploreMore";
 import { InstructorSection } from "../Components/Core/HomePage/InstructorSection";
+import ReviewSlider from "../Components/common/ReviewSlider";
+import Footer from "../Components/common/Footer";
 
 const Home = () => {
   return (
@@ -22,7 +24,7 @@ const Home = () => {
         <Link to={"/signup"}>
           <div
             className="group mx-auto p-1 rounded-full bg-richblack-800 font-bold text-richblack-200
-          transition-all duration-200 hover:scale-95 w-fit"
+          transition-all duration-200 hover:scale-95 w-fit mt-8"
           >
             <div
               className="flex flex-row items-center gap-2 rounded-full px-10 py-[5px]
@@ -183,12 +185,13 @@ const Home = () => {
         <h1 className="text-center text-4xl font-semibold mt-8">
           Reviews from other learners
         </h1>
-        {/* <ReviewSlider /> */}
+        <ReviewSlider />
       </div>
 
       {/* section 4 */}
 
-      {/* footer */}
+      {/*Footer */}
+      <Footer />
     </div>
   );
 };

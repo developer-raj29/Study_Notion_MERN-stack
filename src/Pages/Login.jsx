@@ -1,6 +1,6 @@
 import React from "react";
-import Template from "../component/Template";
-import loginImg from "../assets/login.png";
+import loginImg from "../assets/Images/login.webp";
+import Template from "../Components/Core/Auth/Template";
 
 const Login = ({ setIsLoggedIn }) => {
   return (

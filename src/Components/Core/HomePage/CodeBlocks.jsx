@@ -1,5 +1,5 @@
 import React from "react";
-import CTAButton from "../HomePage/Button";
+import CTAButton from "./Button";
 // import HighlightText from "../HomePage/HighlightText";
 import { FaArrowRight } from "react-icons/fa";
 // import { Link } from "react-router-dom";

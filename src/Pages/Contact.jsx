@@ -1,9 +1,32 @@
 import React from "react";
-
-export const Contact = () => {
+import Footer from "../Components/common/Footer";
+import ContactDetails from "../Components/contactPage/ContactDetails";
+import ContactForm from "../Components/contactPage/ContactForm";
+import ReviewSlider from "../Components/common/ReviewSlider";
+const Contact = () => {
   return (
-    <div className="flex justify-center items-center text-3xl">
-      Contact Pages
+    <div>
+      <div className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white lg:flex-row">
+        {/* Contact Details */}
+        <div className="lg:w-[40%]">
+          <ContactDetails />
+        </div>
+
+        {/* Contact Form */}
+        <div className="lg:w-[60%]">
+          <ContactForm />
+        </div>
+      </div>
+      <div className="relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white">
+        {/* Reviws from Other Learner */}
+        <h1 className="text-center text-4xl font-semibold mt-8">
+          Reviews from other learners
+        </h1>
+        <ReviewSlider />
+      </div>
+      <Footer />
     </div>
   );
 };
+
+export default Contact;
