@@ -68,7 +68,6 @@ exports.IsStudent = async (req, res, next) => {
 };
 
 // is Instructor
-
 exports.IsInstructor = async (req, res, next) => {
   try {
     if (req.user.accoutType !== "Instructor") {
