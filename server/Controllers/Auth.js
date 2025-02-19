@@ -10,15 +10,72 @@ const Profile = require("../Models/Profile");
 require("dotenv").config();
 
 // Send OTP For Email Verification
+// exports.sendOTP = async (req, res) => {
+//   try {
+//     // fetch email from req body
+//     const { email } = req.body.email;
+
+//     //   check if email is already exist
+//     const checkUserPresent = await User.findOne({ email });
+
+//     //   if user already exists, then return a response
+//     if (checkUserPresent) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "User already registered",
+//       });
+//     }
+
+//     //   generate otp
+//     var otp = otpGenerator.generate(6, {
+//       upperCaseAlphabet: false,
+//       lowerCaseAlphabet: false,
+//       specialChars: false,
+//     });
+
+//     console.log("OTP generated : ", otp);
+
+//     // check unique otp or not
+//     const result = await User.findOne({ otp: otp });
+
+//     while (result) {
+//       otp = otpGenerator.generate(6, {
+//         upperCaseAlphabet: false,
+//         lowerCaseAlphabet: false,
+//         specialChars: false,
+//       });
+//       result = await User.findOne({ otp: otp });
+//     }
+
+//     // save otp in database
+//     const otpPayload = { email, otp };
+
+//     // create an entry for otp
+//     const otpBody = await OTP.create(otpPayload);
+//     console.log(otpBody);
+
+//     res.status(200).json({
+//       success: true,
+//       message: "OTP sent successfully",
+//       otp: otp,
+//     });
+//   } catch (error) {
+//     console.error("Error occured while sending mails: ", error);
+//     return res.status(500).json({
+//       success: false,
+//       message: "Internal server error",
+//       error: error.message,
+//     });
+//   }
+// };
+
 exports.sendOTP = async (req, res) => {
   try {
-    // fetch email from req body
-    const { email } = req.body.email;
+    // ✅ Extract email correctly
+    const { email } = req.body;
 
-    //   check if email is already exist
+    // ✅ Check if user is already registered
     const checkUserPresent = await User.findOne({ email });
-
-    //   if user already exists, then return a response
     if (checkUserPresent) {
       return res.status(400).json({
         success: false,
@@ -26,42 +83,50 @@ exports.sendOTP = async (req, res) => {
       });
     }
 
-    //   generate otp
-    var otp = otpGenerator.generate(6, {
-      upperCaseAlphabet: false,
-      lowerCaseAlphabet: false,
-      specialChars: false,
+    // ✅ Generate a 6-digit numeric OTP
+    let otp = otpGenerator.generate(6, {
+      digits: true, // ✅ Only numbers
+      upperCaseAlphabets: false, // ❌ No uppercase letters
+      lowerCaseAlphabets: false, // ❌ No lowercase letters
+      specialChars: false, // ❌ No special characters
     });
 
-    console.log("OTP generated : ", otp);
+    console.log("Generated OTP:", otp); // Should be a 6-digit number
 
-    // check unique otp or not
-    const result = await User.findOne({ otp: otp });
-
-    while (result) {
+    // ✅ Ensure OTP is unique
+    let isUniqueOTP = await OTP.findOne({ otp });
+    while (isUniqueOTP) {
       otp = otpGenerator.generate(6, {
-        upperCaseAlphabet: false,
-        lowerCaseAlphabet: false,
+        digits: true,
+        upperCaseAlphabets: false,
+        lowerCaseAlphabets: false,
         specialChars: false,
       });
-      result = await User.findOne({ otp: otp });
+      isUniqueOTP = await OTP.findOne({ otp });
     }
 
-    // save otp in database
-    const otpPayload = { email, otp };
+    console.log("isUniqueOTP: ", isUniqueOTP);
 
-    // create an entry for otp
-    const otpBody = await OTP.create(otpPayload);
-    console.log(otpBody);
+    // ✅ Add expiry time (e.g., 5 minutes)
+    const otpPayload = {
+      email,
+      otp,
+      createdAt: new Date(),
+      expiresAt: new Date(Date.now() + 5 * 60 * 1000), // OTP valid for 5 mins
+    };
 
+    // ✅ Save OTP in the database
+    await OTP.create(otpPayload);
+
+    // ✅ Send Response (REMOVE `otp` from response in production)
     res.status(200).json({
       success: true,
       message: "OTP sent successfully",
-      otp: otp,
+      otp, // ⚠️ Remove this in production for security reasons!
     });
   } catch (error) {
-    console.error("Error occured while sending mails: ", error);
-    return res.status(500).json({
+    console.error("Error while sending OTP:", error);
+    res.status(500).json({
       success: false,
       message: "Internal server error",
       error: error.message,
