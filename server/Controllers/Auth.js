@@ -10,65 +10,6 @@ const Profile = require("../Models/Profile");
 require("dotenv").config();
 
 // Send OTP For Email Verification
-// exports.sendOTP = async (req, res) => {
-//   try {
-//     // fetch email from req body
-//     const { email } = req.body.email;
-
-//     //   check if email is already exist
-//     const checkUserPresent = await User.findOne({ email });
-
-//     //   if user already exists, then return a response
-//     if (checkUserPresent) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "User already registered",
-//       });
-//     }
-
-//     //   generate otp
-//     var otp = otpGenerator.generate(6, {
-//       upperCaseAlphabet: false,
-//       lowerCaseAlphabet: false,
-//       specialChars: false,
-//     });
-
-//     console.log("OTP generated : ", otp);
-
-//     // check unique otp or not
-//     const result = await User.findOne({ otp: otp });
-
-//     while (result) {
-//       otp = otpGenerator.generate(6, {
-//         upperCaseAlphabet: false,
-//         lowerCaseAlphabet: false,
-//         specialChars: false,
-//       });
-//       result = await User.findOne({ otp: otp });
-//     }
-
-//     // save otp in database
-//     const otpPayload = { email, otp };
-
-//     // create an entry for otp
-//     const otpBody = await OTP.create(otpPayload);
-//     console.log(otpBody);
-
-//     res.status(200).json({
-//       success: true,
-//       message: "OTP sent successfully",
-//       otp: otp,
-//     });
-//   } catch (error) {
-//     console.error("Error occured while sending mails: ", error);
-//     return res.status(500).json({
-//       success: false,
-//       message: "Internal server error",
-//       error: error.message,
-//     });
-//   }
-// };
-
 exports.sendOTP = async (req, res) => {
   try {
     // ✅ Extract email correctly
