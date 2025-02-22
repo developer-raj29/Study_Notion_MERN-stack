@@ -5,7 +5,6 @@ import rzpLogo from "../../assets/Logo/Logo-Full-Dark.png"
 import { setPaymentLoading } from "../../slices/courseSlice";
 import { resetCart } from "../../slices/cartSlice";
 
-
 const {COURSE_PAYMENT_API, COURSE_VERIFY_API, SEND_PAYMENT_SUCCESS_EMAIL_API} = studentEndpoints;
 
 function loadScript(src) {
@@ -22,7 +21,6 @@ function loadScript(src) {
         document.body.appendChild(script);
     })
 }
-
 
 export async function buyCourse(token, courses, userDetails, navigate, dispatch) {
     const toastId = toast.loading("Loading...");

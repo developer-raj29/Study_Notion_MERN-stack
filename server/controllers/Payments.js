@@ -4,6 +4,7 @@ const User = require("../models/User");
 const mailSender = require("../utils/MailSender");
 const { default: mongoose } = require("mongoose");
 const crypto = require("crypto");
+require("dotenv").config();
 
 const {
   courseEnrollmentEmail,

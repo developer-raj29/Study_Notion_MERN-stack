@@ -7,6 +7,7 @@ const Section = require("../models/Section");
 const SubSection = require("../models/SubSection");
 const CourseProgress = require("../models/CourseProgess");
 const { convertSecondsToDuration } = require("../utils/secToDuration");
+require("dotenv").config();
 
 // get all courses
 exports.createCourse = async (req, res) => {
