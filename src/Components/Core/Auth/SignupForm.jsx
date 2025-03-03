@@ -96,7 +96,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
           </label>
 
           <label className="w-full">
-            <p>
+            <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
               Last Name<sup className="text-pink-200">*</sup>
             </p>
             <input
