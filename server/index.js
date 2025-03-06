@@ -11,7 +11,6 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const { cloudinaryConnect } = require("./config/cloudinary");
-const dotenv = require("dotenv");
 
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;

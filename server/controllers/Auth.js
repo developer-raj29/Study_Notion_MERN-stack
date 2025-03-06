@@ -165,7 +165,7 @@ exports.signup = async (req, res) => {
       lastName,
       email,
       password: hashedPassword,
-      accountType,
+      accountType: accountType,
       additionalDetails: profileDetails._id,
       image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}${lastName}`,
     });
@@ -200,7 +200,7 @@ exports.login = async (req, res) => {
     }
 
     // user check exist or not
-    const user = await User.findOne({ email }).populate("additionalDetail");
+    const user = await User.findOne({ email }).populate("additionalDetails");
 
     if (!user) {
       return res.status(401).json({
