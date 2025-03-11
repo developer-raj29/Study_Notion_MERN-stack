@@ -110,7 +110,7 @@ exports.showAllCategories = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Internal server error while creating categories",
+      message: "Categories fetched successfully",
       allCategory: allCategory,
     });
   } catch (error) {

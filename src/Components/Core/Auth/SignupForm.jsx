@@ -43,8 +43,8 @@ const SignupForm = ({ setIsLoggedIn }) => {
       accountType,
     };
 
-    console.log(accountData);
-    console.log(finalData);
+    console.log("Signup Account Data: ", accountData);
+    console.log("Signup Final Data: ", finalData);
     navigate("/dashboard");
   };
 

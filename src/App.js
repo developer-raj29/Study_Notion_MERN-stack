@@ -11,9 +11,24 @@ import PrivateRoute from "./Components/Core/Auth/PrivateRoute";
 import CourseDetails from "./Pages/CourseDetails";
 import Catalog from "./Pages/Catalog";
 import Contact from "./Pages/Contact";
+import OpenRoute from "./Components/Core/Auth/OpenRoute";
+import ForgotPassword from "./Pages/ForgotPassword";
+import VerifyEmail from "./Pages/VerifyEmail";
+import UpdatePassword from "./Pages/UpdatePassword";
+import MyProfile from "./Components/Core/Dashborad/MyProfile";
+import Settings from "./Components/Core/Dashborad/Settings";
+import Cart from "./Components/Core/Dashborad/Cart";
+import EnrolledCourses from "./Components/Core/Dashborad/EnrolledCourses";
+import { ACCOUNT_TYPE } from "./utils/constants";
+import { useSelector } from "react-redux";
+import AddCourse from "./Components/Core/Dashborad/AddCourse";
+import Instructor from "./Components/Core/Dashborad/InstructorDashboard/Instructor";
+import MyCourses from "./Components/Core/Dashborad/MyCourses";
+import EditCourse from "./Components/Core/Dashborad/EditCourse";
 
 const App = () => {
   const [isloggedIn, setIsLoggedIn] = useState(false);
+  const { user } = useSelector((state) => state.profile);
 
   return (
     <div className="relative w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
@@ -25,13 +40,54 @@ const App = () => {
 
         <Route path="catalog/:catalogName" element={<Catalog />} />
         <Route path="courses/:courseId" element={<CourseDetails />} />
+
+        {/* <OpenRoute>
+
+        </OpenRoute> */}
+
         <Route
           path="/login"
-          element={<Login setIsLoggedIn={setIsLoggedIn} />}
+          element={
+            <OpenRoute>
+              <Login setIsLoggedIn={setIsLoggedIn} />
+            </OpenRoute>
+          }
         />
+
         <Route
           path="/signup"
-          element={<Signup setIsLoggedIn={setIsLoggedIn} />}
+          element={
+            <OpenRoute>
+              <Signup setIsLoggedIn={setIsLoggedIn} />
+            </OpenRoute>
+          }
+        />
+
+        <Route
+          path="forgot-password"
+          element={
+            <OpenRoute>
+              <ForgotPassword />
+            </OpenRoute>
+          }
+        />
+
+        <Route
+          path="verify-email"
+          element={
+            <OpenRoute>
+              <VerifyEmail />
+            </OpenRoute>
+          }
+        />
+
+        <Route
+          path="update-password/:id"
+          element={
+            <OpenRoute>
+              <UpdatePassword />
+            </OpenRoute>
+          }
         />
 
         <Route
@@ -41,7 +97,33 @@ const App = () => {
               <Dashboard />
             </PrivateRoute>
           }
-        />
+        >
+          <Route path="my-profile" element={<MyProfile />} />
+          <Route path="settings" element={<Settings />} />
+
+          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+            <>
+              <Route path="cart" element={<Cart />} />
+              <Route path="enrolled-courses" element={<EnrolledCourses />} />
+            </>
+          )}
+
+          {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+            <>
+              <Route path="dashboard/instructor" element={<Instructor />} />
+              <Route path="dashboard/add-course" element={<AddCourse />} />
+              <Route
+                path="dashboard/enrolled-courses"
+                element={<EnrolledCourses />}
+              />
+              <Route path="dashboard/my-courses" element={<MyCourses />} />
+              <Route
+                path="dashboard/edit-course/:courseId"
+                element={<EditCourse />}
+              />
+            </>
+          )}
+        </Route>
       </Routes>
     </div>
   );

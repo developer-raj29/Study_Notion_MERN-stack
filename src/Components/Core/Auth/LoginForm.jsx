@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../../services/operations/authAPI";
 
 const LoginForm = ({ setIsLoggedIn }) => {
   const [formData, setformData] = useState({
@@ -10,6 +12,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showpassword, setpassword] = useState(false);
 
@@ -23,11 +26,16 @@ const LoginForm = ({ setIsLoggedIn }) => {
   const submitHandler = (event) => {
     event.preventDefault();
     setIsLoggedIn(true);
-    toast.success("Logged In");
+    const { email, password } = formData;
 
-    console.log(formData);
+    if (!email || !password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
 
-    navigate("/dashboard");
+    console.log("Login Details: ", formData);
+
+    dispatch(login(email, password, navigate));
   };
 
   return (

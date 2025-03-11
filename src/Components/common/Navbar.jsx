@@ -19,17 +19,20 @@ const Navbar = () => {
   const [subLinks, setSubLinks] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const fetchSubLinks = async () => {
+    try {
+      const res = await apiConnector("GET", categories.CATEGORIES_API);
+      console.log("Printing Sublinks results: ", res);
+      setSubLinks(res.data.data);
+    } catch (error) {
+      console.log("Could not fetch Categories.", error);
+    }
+  };
+
   useEffect(() => {
-    (async () => {
-      setLoading(true);
-      try {
-        const res = await apiConnector("GET", categories.CATEGORIES_API);
-        setSubLinks(res.data.data);
-      } catch (error) {
-        console.log("Could not fetch Categories.", error);
-      }
-      setLoading(false);
-    })();
+    setLoading(true);
+    fetchSubLinks();
+    setLoading(false);
   }, []);
 
   // console.log("sub links", subLinks)
@@ -60,9 +63,7 @@ const Navbar = () => {
                   <>
                     <div
                       className={`group relative flex cursor-pointer items-center gap-1 ${
-                        matchRoute("/catalog/:catalogName")
-                          ? "text-yellow-25"
-                          : "text-richblack-25"
+                        matchRoute("/catalog/:catalogName") ? "text-yellow-25" : "text-richblack-25"
                       }`}
                     >
                       <p>{link.title}</p>
@@ -73,11 +74,7 @@ const Navbar = () => {
                           <p className="text-center">Loading...</p>
                         ) : subLinks ? (
                           <>
-                            {subLinks
-                              ?.filter(
-                                (subLink) => subLink?.courses?.length > 0
-                              )
-                              ?.map((subLink, i) => (
+                            {subLinks?.filter((subLink) => subLink?.courses?.length > 0)?.map((subLink, i) => (
                                 <Link
                                   to={`/catalog/${subLink.name
                                     .split(" ")

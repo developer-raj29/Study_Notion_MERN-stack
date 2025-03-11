@@ -99,7 +99,9 @@ export function login(email, password, navigate) {
         throw new Error(response.data.message);
       }
 
-      toast.success("Login Successful");
+      // console.log("response.data.message: ", response.data.message);
+
+      toast.success(response.data.message || "Login Successful");
       dispatch(setToken(response.data.token));
       const userImage = response.data?.user?.image
         ? response.data.user.image
