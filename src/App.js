@@ -25,6 +25,9 @@ import AddCourse from "./Components/Core/Dashborad/AddCourse";
 import Instructor from "./Components/Core/Dashborad/InstructorDashboard/Instructor";
 import MyCourses from "./Components/Core/Dashborad/MyCourses";
 import EditCourse from "./Components/Core/Dashborad/EditCourse";
+import Error from "./Pages/Error";
+import VideoDetails from "./Components/Core/ViewCourse/VideoDetails";
+import ViewCourse from "./Pages/ViewCourse";
 
 const App = () => {
   const [isloggedIn, setIsLoggedIn] = useState(false);
@@ -124,6 +127,25 @@ const App = () => {
             </>
           )}
         </Route>
+
+        <Route
+          element={
+            <PrivateRoute>
+              <ViewCourse />
+            </PrivateRoute>
+          }
+        >
+          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+            <>
+              <Route
+                path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
+                element={<VideoDetails />}
+              />
+            </>
+          )}
+        </Route>
+
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );

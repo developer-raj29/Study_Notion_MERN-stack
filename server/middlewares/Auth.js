@@ -10,9 +10,9 @@ exports.auth = async (req, res, next) => {
     const token =
       req.cookies.token ||
       req.body.token ||
-      req.header("Authorization").replace("Bearer ");
+      req.header("Authorization")?.replace("Bearer ", "");
 
-    //   if token is missing, then return response
+    // if token is missing, then return response
     if (!token) {
       return res.status(401).json({
         success: false,
@@ -23,26 +23,22 @@ exports.auth = async (req, res, next) => {
     // verify the token
     try {
       const decoded = JWT.verify(token, process.env.JWT_SECRET);
-
-      console.log(decoded);
-
-      //   const user = await User.findById(decoded.id);
       req.user = decoded;
     } catch (err) {
-      // varification issue message
-      res.status(401).json({
+      return res.status(401).json({
         success: false,
         message: "Invalid Token",
         error: err.message,
       });
     }
-    next();
+
+    next(); // ✅ Only called if everything is valid
   } catch (error) {
     console.log(error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Something went wrong while verifying the token",
-      error: err.message,
+      error: error.message,
     });
   }
 };

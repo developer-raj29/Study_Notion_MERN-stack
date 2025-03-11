@@ -6,10 +6,10 @@ import { RiDeleteBin6Line } from "react-icons/ri"
 import { BiDownArrow } from "react-icons/bi"
 import { AiOutlinePlus } from "react-icons/ai"
 import SubSectionModal from './SubSectionModal'
-import ConfirmationModal from '../../../../common/ConfirmationModal'
 import { deleteSection, deleteSubSection } from '../../../../../services/operations/courseDetailsAPI'
 import { IoFastFood } from 'react-icons/io5'
 import { setCourse } from '../../../../../slices/courseSlice'
+import ConfirmationModal from '../../../../common/confirmationModal'
 
 const NestedView = ({ handleChangeEditSectionName }) => {
 
