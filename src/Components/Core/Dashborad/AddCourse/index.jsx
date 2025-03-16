@@ -1,6 +1,6 @@
 import RenderSteps from "./RenderSteps";
 
-const AddCourse = () => {
+export default function AddCourse() {
   return (
     <>
       <div className="flex w-full items-start gap-x-6">
@@ -35,6 +35,4 @@ const AddCourse = () => {
       </div>
     </>
   );
-};
-
-export default AddCourse;
+}

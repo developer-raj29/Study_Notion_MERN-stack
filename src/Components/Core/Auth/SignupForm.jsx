@@ -2,25 +2,32 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { ACCOUNT_TYPE } from "../../../utils/constants";
+import { setSignupData } from "../../../slices/authSlice";
+import { sendOtp } from "../../../services/operations/authAPI";
+import { useDispatch } from "react-redux";
+import Tab from "../../common/Tab";
 
 const SignupForm = ({ setIsLoggedIn }) => {
-  const [formData, setformData] = useState({
-    firstname: "",
-    lastname: "",
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT);
 
   const [showpassword, setpassword] = useState(false);
   const [showConpassword, setConpassword] = useState(false);
-  const [accountType, setaccountType] = useState("student");
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
-    setformData((prev) => {
+    setFormData((prev) => {
       return { ...prev, [name]: value };
     });
   };
@@ -28,12 +35,12 @@ const SignupForm = ({ setIsLoggedIn }) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    if (formData.password != formData.confirmPassword) {
+    if (formData.password !== formData.confirmPassword) {
       toast.error("Password do not match");
       return;
     }
     setIsLoggedIn(true);
-    toast.success("Account Created");
+    // toast.success("Account Created");
     const accountData = {
       ...formData,
     };
@@ -43,36 +50,48 @@ const SignupForm = ({ setIsLoggedIn }) => {
       accountType,
     };
 
-    console.log("Signup Account Data: ", accountData);
-    console.log("Signup Final Data: ", finalData);
-    navigate("/dashboard");
+    console.log("finalData: ", finalData);
+
+    // Setting signup data to state
+    // To be used after otp verification
+    dispatch(setSignupData(finalData));
+
+    // Send OTP to user for verification
+    dispatch(sendOtp(formData.email, navigate));
+
+    // Reset
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
+    setAccountType(ACCOUNT_TYPE.STUDENT);
+
+    // console.log("Signup Account Data: ", accountData);
+    // console.log("Signup Final Data: ", finalData);
+    // navigate("/dashboard");
   };
+
+  // data to pass to Tab component
+  const tabData = [
+    {
+      id: 1,
+      tabName: "Student",
+      type: ACCOUNT_TYPE.STUDENT,
+    },
+    {
+      id: 2,
+      tabName: "Instructor",
+      type: ACCOUNT_TYPE.INSTRUCTOR,
+    },
+  ];
 
   return (
     <div>
-      {/* student instructor tag */}
-      <div className="flex bg-richblack-800 p-1 gap-x-1 my-6 rounded-full max-w-max">
-        <button
-          className={`${
-            accountType === "student"
-              ? "bg-richblack-900 text-richblack-5"
-              : "bg-transparent text-richblack-200"
-          } py-2 px-5 rounded-full transition-all duration-400`}
-          onClick={() => setaccountType("student")}
-        >
-          Student
-        </button>
-        <button
-          className={`${
-            accountType === "instructor"
-              ? "bg-richblack-900 text-richblack-5"
-              : "bg-transparent text-richblack-200"
-          } py-2 px-5 rounded-full transition-all duration-400`}
-          onClick={() => setaccountType("instructor")}
-        >
-          Instructor
-        </button>
-      </div>
+      {/* Tab */}
+      <Tab tabData={tabData} field={accountType} setField={setAccountType} />
 
       <form
         onSubmit={submitHandler}
@@ -90,7 +109,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
               type="text"
               name="firstname"
               onChange={changeHandler}
-              value={formData.firstname}
+              value={formData.firstName}
               placeholder="Enter First Name"
             />
           </label>
@@ -105,7 +124,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
               type="text"
               name="lastname"
               onChange={changeHandler}
-              value={formData.lastname}
+              value={formData.lastName}
               placeholder="Enter Last Name"
             />
           </label>

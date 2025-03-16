@@ -87,24 +87,14 @@ exports.signup = async (req, res) => {
       password,
       confirmPassword,
       accountType,
-      contactNumber,
       otp,
     } = req.body;
 
     // validate kro
-    if (
-      !firstName ||
-      !lastName ||
-      !email ||
-      !password ||
-      !confirmPassword ||
-      !accountType ||
-      !contactNumber ||
-      !otp
-    ) {
-      return res.status(403).json({
+    if ( !firstName || !lastName || !email || !password || !confirmPassword || !otp ) {
+      return res.status(403).send({
         success: false,
-        message: "Please Fill All fields are required",
+        message: "All Fields are required",
       });
     }
 

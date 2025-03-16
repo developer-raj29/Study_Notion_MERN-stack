@@ -8,6 +8,7 @@ const SubSection = require("../models/SubSection");
 const CourseProgress = require("../models/CourseProgess");
 const { convertSecondsToDuration } = require("../utils/secToDuration");
 require("dotenv").config();
+const mongoose = require("mongoose");
 
 // get all courses
 exports.createCourse = async (req, res) => {
@@ -215,7 +216,15 @@ exports.getAllCourses = async (req, res) => {
 exports.getCourseDetails = async (req, res) => {
   try {
     // .get id
-    const courseId = req.body;
+    const { _id: courseId } = req.body;
+
+    // Validate ID
+    if (!courseId || !mongoose.Types.ObjectId.isValid(courseId)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or missing course ID",
+      });
+    }
 
     // find course details
     const courseDetails = await Course.find({ _id: courseId })

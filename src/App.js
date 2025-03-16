@@ -34,7 +34,7 @@ const App = () => {
   const { user } = useSelector((state) => state.profile);
 
   return (
-    <div className="relative w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
+    <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
       <Navbar isloggedIn={isloggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -113,17 +113,11 @@ const App = () => {
 
           {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
             <>
-              <Route path="dashboard/instructor" element={<Instructor />} />
-              <Route path="dashboard/add-course" element={<AddCourse />} />
-              <Route
-                path="dashboard/enrolled-courses"
-                element={<EnrolledCourses />}
-              />
-              <Route path="dashboard/my-courses" element={<MyCourses />} />
-              <Route
-                path="dashboard/edit-course/:courseId"
-                element={<EditCourse />}
-              />
+              <Route path="instructor" element={<Instructor />} />
+              <Route path="add-course" element={<AddCourse />} />
+              <Route path="enrolled-courses" element={<EnrolledCourses />} />
+              <Route path="my-courses" element={<MyCourses />} />
+              <Route path="edit-course/:courseId" element={<EditCourse />} />
             </>
           )}
         </Route>

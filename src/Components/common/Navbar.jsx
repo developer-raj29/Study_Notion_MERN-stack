@@ -63,7 +63,9 @@ const Navbar = () => {
                   <>
                     <div
                       className={`group relative flex cursor-pointer items-center gap-1 ${
-                        matchRoute("/catalog/:catalogName") ? "text-yellow-25" : "text-richblack-25"
+                        matchRoute("/catalog/:catalogName")
+                          ? "text-yellow-25"
+                          : "text-richblack-25"
                       }`}
                     >
                       <p>{link.title}</p>
@@ -74,7 +76,11 @@ const Navbar = () => {
                           <p className="text-center">Loading...</p>
                         ) : subLinks ? (
                           <>
-                            {subLinks?.filter((subLink) => subLink?.courses?.length > 0)?.map((subLink, i) => (
+                            {subLinks
+                              ?.filter(
+                                (subLink) => subLink?.courses?.length > 0
+                              )
+                              ?.map((subLink, i) => (
                                 <Link
                                   to={`/catalog/${subLink.name
                                     .split(" ")
