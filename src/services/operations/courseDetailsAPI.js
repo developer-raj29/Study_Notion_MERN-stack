@@ -74,7 +74,7 @@ export const fetchCourseCategories = async () => {
     if (!response?.data?.success) {
       throw new Error("Could Not Fetch Course Categories");
     }
-    result = Array.isArray(response?.data?.data) ? response.data.data : [];
+    result = response?.data?.allCategory;
   } catch (error) {
     console.log("COURSE_CATEGORY_API API ERROR............", error);
     toast.error(error.message);

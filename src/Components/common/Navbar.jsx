@@ -23,7 +23,7 @@ const Navbar = () => {
     try {
       const res = await apiConnector("GET", categories.CATEGORIES_API);
       console.log("Printing Sublinks results: ", res);
-      setSubLinks(res.data.data);
+      setSubLinks(res.data.allCategory);
     } catch (error) {
       console.log("Could not fetch Categories.", error);
     }
@@ -35,7 +35,7 @@ const Navbar = () => {
     setLoading(false);
   }, []);
 
-  // console.log("sub links", subLinks)
+  console.log("sub links", subLinks);
 
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname);

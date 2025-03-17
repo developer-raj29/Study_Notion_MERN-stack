@@ -107,7 +107,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
               className="bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px]"
               required
               type="text"
-              name="firstname"
+              name="firstName"
               onChange={changeHandler}
               value={formData.firstName}
               placeholder="Enter First Name"
@@ -122,7 +122,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
               className="bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px]"
               required
               type="text"
-              name="lastname"
+              name="lastName"
               onChange={changeHandler}
               value={formData.lastName}
               placeholder="Enter Last Name"

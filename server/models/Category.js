@@ -1,4 +1,4 @@
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 // const tagsSchema = new mongoose.Schema({
 //   name: {
@@ -18,7 +18,7 @@
 
 // module.exports = mongoose.model("Tag", tagsSchema);
 
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 // Define the Tags schema
 const categorySchema = new mongoose.Schema({

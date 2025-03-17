@@ -15,7 +15,7 @@ exports.createCourse = async (req, res) => {
   try {
     // create courses
     // fetch data
-    const { courseName, courseDescription, whatYouWillLearn, price, tag } =
+    const { _id, courseName, courseDescription, whatYouWillLearn, price, tag } =
       req.body;
 
     //   get thumbnail
@@ -23,6 +23,7 @@ exports.createCourse = async (req, res) => {
 
     // validation
     if (
+      !_id ||
       !courseName ||
       !courseDescription ||
       !whatYouWillLearn ||
@@ -37,7 +38,9 @@ exports.createCourse = async (req, res) => {
     }
 
     // check for Instructor
-    const userId = req.user._id;
+    const userId = _id;
+
+    console.log("userId: ", userId);
 
     const instructorDetails = await User.findById(userId);
 

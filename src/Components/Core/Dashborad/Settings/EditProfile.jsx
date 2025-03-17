@@ -17,12 +17,23 @@ const EditProfile = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: "onTouched",
+    defaultValues: {
+      firstName: user?.firstName || "",
+      lastName: user?.lastName || "",
+      dateOfBirth: user?.additionalDetails?.dateOfBirth || "",
+      gender: user?.additionalDetails?.gender || "",
+      contactNumber: user?.additionalDetails?.contactNumber || "",
+      about: user?.additionalDetails?.about || "",
+    },
+  });
 
   const submitProfileForm = async (data) => {
     // console.log("Form Data - ", data)
     try {
-      dispatch(updateProfile(token, data));
+      await dispatch(updateProfile(token, data));
+      navigate("/dashboard/my-profile");
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message);
     }
@@ -109,24 +120,21 @@ const EditProfile = () => {
                 Gender
               </label>
               <select
-                type="text"
-                name="gender"
-                id="gender"
-                className="form-style"
                 {...register("gender", { required: true })}
-                defaultValue={user?.additionalDetails?.gender}
+                className="form-style"
               >
-                {genders.map((ele, i) => {
-                  return (
-                    <option key={i} value={ele}>
-                      {ele}
-                    </option>
-                  );
-                })}
+                <option value="" disabled>
+                  Select your gender
+                </option>
+                {genders.map((ele, i) => (
+                  <option key={i} value={ele}>
+                    {ele}
+                  </option>
+                ))}
               </select>
               {errors.gender && (
                 <span className="-mt-1 text-[12px] text-yellow-100">
-                  Please enter your Date of Birth.
+                  Please select your gender.
                 </span>
               )}
             </div>
@@ -148,8 +156,10 @@ const EditProfile = () => {
                     value: true,
                     message: "Please enter your Contact Number.",
                   },
-                  maxLength: { value: 12, message: "Invalid Contact Number" },
-                  minLength: { value: 10, message: "Invalid Contact Number" },
+                  pattern: {
+                    value: /^[0-9]{10,12}$/,
+                    message: "Invalid Contact Number",
+                  },
                 })}
                 defaultValue={user?.additionalDetails?.contactNumber}
               />
