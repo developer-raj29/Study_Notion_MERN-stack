@@ -12,6 +12,7 @@ import RenderSteps from "../AddCourse/RenderSteps";
 const EditCourse = () => {
   const dispatch = useDispatch();
   const { courseId } = useParams();
+  console.log("courseId index: ", courseId);
   const { course } = useSelector((state) => state.course);
   const [loading, setLoading] = useState(false);
   const { token } = useSelector((state) => state.auth);
@@ -20,6 +21,7 @@ const EditCourse = () => {
     (async () => {
       setLoading(true);
       const result = await getFullDetailsOfCourse(courseId, token);
+      console.log("Course Details: ", result);
       if (result?.courseDetails) {
         dispatch(setEditCourse(true));
         dispatch(setCourse(result?.courseDetails));
