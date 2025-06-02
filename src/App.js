@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
@@ -28,10 +28,43 @@ import EditCourse from "./Components/Core/Dashborad/EditCourse";
 import Error from "./Pages/Error";
 import VideoDetails from "./Components/Core/ViewCourse/VideoDetails";
 import ViewCourse from "./Pages/ViewCourse";
+import CheckAuth from "./Components/Core/Auth/CheckAuth";
+import { logout } from "./services/operations/authAPI";
+import { jwtDecode } from "jwt-decode";
 
 const App = () => {
   const [isloggedIn, setIsLoggedIn] = useState(false);
   const { user } = useSelector((state) => state.profile);
+  const { token } = useSelector((state) => state.auth);
+
+  // console.log("user: ", user, "token: ", token);
+
+  // useEffect(() => {
+  //   if (token === null) {
+  //     logout("/login");
+  //   }
+  // }, [token]);
+
+  // useEffect(() => {
+  //   if (token) {
+  //     const decoded = jwtDecode(token);
+  //     const currentTime = Math.floor(Date.now() / 1000);
+  //     const remainingTime = decoded.exp - currentTime;
+
+  //     if (remainingTime > 0) {
+  //       const timer = setTimeout(() => {
+  //         console.log(remainingTime);
+  //         logout("/login");
+  //         localStorage.removeItem("token");
+  //       }, remainingTime * 1000); // convert to milliseconds
+
+  //       return () => clearTimeout(timer); // cleanup on unmount
+  //     } else {
+  //       logout("/login");
+  //       localStorage.removeItem("token");
+  //     }
+  //   }
+  // }, [token]);
 
   return (
     <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
@@ -41,8 +74,8 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
 
-        <Route path="catalog/:catalogName" element={<Catalog />} />
-        <Route path="courses/:courseId" element={<CourseDetails />} />
+        <Route path="/catalog/:catalogName" element={<Catalog />} />
+        <Route path="/courses/:courseId" element={<CourseDetails />} />
 
         {/* <OpenRoute>
 
@@ -67,7 +100,7 @@ const App = () => {
         />
 
         <Route
-          path="forgot-password"
+          path="/forgot-password"
           element={
             <OpenRoute>
               <ForgotPassword />
@@ -76,7 +109,7 @@ const App = () => {
         />
 
         <Route
-          path="verify-email"
+          path="/verify-email"
           element={
             <OpenRoute>
               <VerifyEmail />
@@ -85,7 +118,7 @@ const App = () => {
         />
 
         <Route
-          path="update-password/:id"
+          path="/update-password/:id"
           element={
             <OpenRoute>
               <UpdatePassword />
@@ -93,24 +126,22 @@ const App = () => {
           }
         />
 
+        {/* Private Route - for Only Logged in User */}
         <Route
           path="/dashboard"
           element={
-            <PrivateRoute isloggedIn={isloggedIn}>
-              <Dashboard />
-            </PrivateRoute>
+            <CheckAuth>
+              <PrivateRoute isloggedIn={isloggedIn}>
+                <Dashboard />
+              </PrivateRoute>
+            </CheckAuth>
           }
         >
+          {/* Route for all users */}
           <Route path="my-profile" element={<MyProfile />} />
           <Route path="settings" element={<Settings />} />
 
-          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
-            <>
-              <Route path="cart" element={<Cart />} />
-              <Route path="enrolled-courses" element={<EnrolledCourses />} />
-            </>
-          )}
-
+          {/* Route only for Instructors */}
           {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
             <>
               <Route path="instructor" element={<Instructor />} />
@@ -120,13 +151,23 @@ const App = () => {
               <Route path="edit-course/:courseId" element={<EditCourse />} />
             </>
           )}
+
+          {/* Route only for Students */}
+          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+            <>
+              <Route path="cart" element={<Cart />} />
+              <Route path="enrolled-courses" element={<EnrolledCourses />} />
+            </>
+          )}
         </Route>
 
         <Route
           element={
-            <PrivateRoute>
-              <ViewCourse />
-            </PrivateRoute>
+            <CheckAuth>
+              <PrivateRoute>
+                <ViewCourse />
+              </PrivateRoute>
+            </CheckAuth>
           }
         >
           {user?.accountType === ACCOUNT_TYPE.STUDENT && (

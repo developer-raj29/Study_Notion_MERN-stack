@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import { HiOutlineCurrencyRupee } from "react-icons/hi";
-import { MdNavigateNext } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addCourseDetails,
@@ -10,13 +7,16 @@ import {
   fetchCourseCategories,
 } from "../../../../../services/operations/courseDetailsAPI";
 import { setCourse, setStep } from "../../../../../slices/courseSlice";
-import { COURSE_STATUS } from "../../../../../utils/constants";
-import IconBtn from "../../../../common/IconBtn";
+import toast from "react-hot-toast";
 import Upload from "../Upload";
+import { COURSE_STATUS } from "../../../../../utils/constants";
+import { HiOutlineCurrencyRupee } from "react-icons/hi";
 import ChipInput from "./ChipInput";
-import RequirementsField from "./RequirementField";
+import RequirementsField from "./RequirementsField";
+import IconBtn from "../../../../common/IconBtn";
+import { MdNavigateNext } from "react-icons/md";
 
-export default function CourseInformationForm() {
+const CourseInformationForm = () => {
   const {
     register,
     handleSubmit,
@@ -35,7 +35,8 @@ export default function CourseInformationForm() {
     const getCategories = async () => {
       setLoading(true);
       const categories = await fetchCourseCategories();
-      if (Array.isArray(categories) && categories.length > 0) {
+      if (categories.length > 0) {
+        // console.log("categories", categories)
         setCourseCategories(categories);
       }
       setLoading(false);
@@ -78,7 +79,7 @@ export default function CourseInformationForm() {
 
   //   handle next button click
   const onSubmit = async (data) => {
-    // console.log(data)
+    console.log(data);
 
     if (editCourse) {
       // const currentValues = getValues()
@@ -105,7 +106,7 @@ export default function CourseInformationForm() {
         if (currentValues.courseBenefits !== course.whatYouWillLearn) {
           formData.append("whatYouWillLearn", data.courseBenefits);
         }
-        if (currentValues.courseCategory._id !== course.category._id) {
+        if (currentValues.courseCategory !== course.category._id) {
           formData.append("category", data.courseCategory);
         }
         if (
@@ -156,7 +157,7 @@ export default function CourseInformationForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6 text-black"
+      className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6"
     >
       {/* Course Title */}
       <div className="flex flex-col space-y-2">
@@ -175,6 +176,7 @@ export default function CourseInformationForm() {
           </span>
         )}
       </div>
+
       {/* Course Short Description */}
       <div className="flex flex-col space-y-2">
         <label className="text-sm text-richblack-5" htmlFor="courseShortDesc">
@@ -192,6 +194,7 @@ export default function CourseInformationForm() {
           </span>
         )}
       </div>
+
       {/* Course Price */}
       <div className="flex flex-col space-y-2">
         <label className="text-sm text-richblack-5" htmlFor="coursePrice">
@@ -218,6 +221,7 @@ export default function CourseInformationForm() {
           </span>
         )}
       </div>
+
       {/* Course Category */}
       <div className="flex flex-col space-y-2">
         <label className="text-sm text-richblack-5" htmlFor="courseCategory">
@@ -245,6 +249,7 @@ export default function CourseInformationForm() {
           </span>
         )}
       </div>
+
       {/* Course Tags */}
       <ChipInput
         label="Tags"
@@ -255,6 +260,7 @@ export default function CourseInformationForm() {
         setValue={setValue}
         getValues={getValues}
       />
+
       {/* Course Thumbnail Image */}
       <Upload
         name="courseImage"
@@ -264,6 +270,7 @@ export default function CourseInformationForm() {
         errors={errors}
         editData={editCourse ? course?.thumbnail : null}
       />
+
       {/* Benefits of the course */}
       <div className="flex flex-col space-y-2">
         <label className="text-sm text-richblack-5" htmlFor="courseBenefits">
@@ -281,6 +288,7 @@ export default function CourseInformationForm() {
           </span>
         )}
       </div>
+
       {/* Requirements/Instructions */}
       <RequirementsField
         name="courseRequirements"
@@ -290,6 +298,7 @@ export default function CourseInformationForm() {
         errors={errors}
         getValues={getValues}
       />
+
       {/* Next Button */}
       <div className="flex justify-end gap-x-2">
         {editCourse && (
@@ -310,4 +319,6 @@ export default function CourseInformationForm() {
       </div>
     </form>
   );
-}
+};
+
+export default CourseInformationForm;

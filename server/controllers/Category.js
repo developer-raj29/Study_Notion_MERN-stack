@@ -100,24 +100,37 @@ exports.createCategory = async (req, res) => {
 };
 
 // get all categories ka handler
+// exports.showAllCategories = async (req, res) => {
+//   try {
+//     // console.log("INSIDE SHOW ALL CATEGORIES");
+//     const allCategory = await Category.find({});
+
+//     res.status(200).json({
+//       success: true,
+//       message: "Categories fetched successfully",
+//       allCategory: allCategory,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: false,
+//       message: "Internal server error while fetching categories",
+//       error: error.message,
+//     });
+//   }
+// };
+
 exports.showAllCategories = async (req, res) => {
   try {
     // console.log("INSIDE SHOW ALL CATEGORIES");
-    const allCategory = await Category.find(
-      {},
-      { name: true, description: true }
-    );
-
+    const allCategorys = await Category.find({});
     res.status(200).json({
       success: true,
-      message: "Categories fetched successfully",
-      allCategory: allCategory,
+      allCategory: allCategorys,
     });
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "Internal server error while fetching categories",
-      error: error.message,
+      message: error.message,
     });
   }
 };

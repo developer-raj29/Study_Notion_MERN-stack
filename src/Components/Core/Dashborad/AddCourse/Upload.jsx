@@ -6,10 +6,21 @@ import { useSelector } from "react-redux";
 import "video-react/dist/video-react.css";
 import { Player } from "video-react";
 
-const Upload = ({ name, label, register, setValue, errors, video = false, viewData = null, editData = null }) => {
+export default function Upload({
+  name,
+  label,
+  register,
+  setValue,
+  errors,
+  video = false,
+  viewData = null,
+  editData = null,
+}) {
   const { course } = useSelector((state) => state.course);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [previewSource, setPreviewSource] = useState( viewData ? viewData : editData ? editData : "");
+  const [previewSource, setPreviewSource] = useState(
+    viewData ? viewData : editData ? editData : ""
+  );
   const inputRef = useRef(null);
 
   const onDrop = (acceptedFiles) => {
@@ -21,7 +32,10 @@ const Upload = ({ name, label, register, setValue, errors, video = false, viewDa
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: !video ? { "image/*": [".jpeg", ".jpg", ".png"] } : { "video/*": [".mp4"] }, onDrop
+    accept: !video
+      ? { "image/*": [".jpeg", ".jpg", ".png"] }
+      : { "video/*": [".mp4"] },
+    onDrop,
   });
 
   const previewFile = (file) => {
@@ -83,7 +97,11 @@ const Upload = ({ name, label, register, setValue, errors, video = false, viewDa
             className="flex w-full flex-col items-center p-6"
             {...getRootProps()}
           >
-            <input {...getInputProps()} ref={inputRef} />
+            <input
+              {...getInputProps()}
+              style={{ display: "none" }}
+              // ref={inputRef}
+            />
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
               <FiUploadCloud className="text-2xl text-yellow-50" />
             </div>
@@ -106,6 +124,4 @@ const Upload = ({ name, label, register, setValue, errors, video = false, viewDa
       )}
     </div>
   );
-};
-
-export default Upload;
+}

@@ -5,55 +5,45 @@ const { uploadImageToCloudinary } = require("../utils/ImageUploader");
 // CREATE SUBSECTION
 exports.createSubSection = async (req, res) => {
   try {
-    // fetch data from req.body
-    const { title, timeduration, description, sectionId } = req.body;
+    // Extract necessary information from the request body
+    const { sectionId, title, description } = req.body;
+    const video = req.files.video;
 
-    // extract file / video
-    const video = req.files.videoFile;
-
-    // data validate
-    if (!sectionId || !timeduration || !description || !video) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required",
-      });
+    // Check if all necessary fields are provided
+    if (!sectionId || !title || !description || !video) {
+      return res.status(404).json({ success: false, message: "All Fields are Required" });
     }
+    console.log(video);
 
-    // upload video to cloudinay
+    // Upload the video file to Cloudinary
     const uploadDetails = await uploadImageToCloudinary(
       video,
       process.env.FOLDER_NAME
     );
-
-    // create a new SubSection
-    const subSectionDetails = await SubSection.create({
+    console.log(uploadDetails);
+    // Create a new sub-section with the necessary information
+    const SubSectionDetails = await SubSection.create({
       title: title,
-      timeduration: timeduration, //`${uploadDetails.duration}`,
+      timeDuration: `${uploadDetails.duration}`,
       description: description,
       videoUrl: uploadDetails.secure_url,
     });
 
-    // push section with this subsection objectID
+    // Update the corresponding section with the newly created sub-section
     const updatedSection = await Section.findByIdAndUpdate(
       { _id: sectionId },
-      { $push: { subsections: subSectionDetails._id } },
+      { $push: { subSection: SubSectionDetails._id } },
       { new: true }
     ).populate("subSection");
 
-    // HW :  Log Updated Section Here, after adding populate query
-
-    // Return Response
-    res.status(200).json({
-      success: true,
-      message: "Subsection Created Successfully",
-      data: updatedSection,
-    });
+    // Return the updated section in the response
+    return res.status(200).json({ success: true, data: updatedSection });
   } catch (error) {
     // Handle any errors that may occur during the process
     console.error("Error creating new sub-section:", error);
     return res.status(500).json({
       success: false,
-      message: "Internal server error, when create subsection",
+      message: "Internal server error",
       error: error.message,
     });
   }

@@ -76,7 +76,6 @@ exports.sendOTP = async (req, res) => {
 };
 
 // Signup Controller for Registration
-
 exports.signup = async (req, res) => {
   try {
     // data fetch from req ki body
@@ -91,7 +90,14 @@ exports.signup = async (req, res) => {
     } = req.body;
 
     // validate kro
-    if ( !firstName || !lastName || !email || !password || !confirmPassword || !otp ) {
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !otp
+    ) {
       return res.status(403).send({
         success: false,
         message: "All Fields are required",
@@ -200,7 +206,7 @@ exports.login = async (req, res) => {
     }
 
     // generate JWT, after password matching
-    if (await bcrypt.compare(password, user.password)) {
+    if (bcrypt.compare(password, user.password)) {
       const payload = {
         email: user.email,
         id: user._id,
@@ -208,7 +214,7 @@ exports.login = async (req, res) => {
       };
 
       const token = JWT.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: "2h",
+        expiresIn: "3h",
       });
 
       user.token = token;
@@ -216,7 +222,7 @@ exports.login = async (req, res) => {
 
       // create cookie and send response
       const options = {
-        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
         httpOnly: true,
       };
 

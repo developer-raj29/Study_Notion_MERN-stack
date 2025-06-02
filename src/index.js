@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import rootReducer from "./reducer";
 import { configureStore } from "@reduxjs/toolkit";
+import { AuthProvider } from "./context/AuthProvider";
 
 const store = configureStore({
   reducer: rootReducer,
@@ -18,8 +19,10 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
-        <Toaster />
+        <AuthProvider>
+          <App />
+          <Toaster />
+        </AuthProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

@@ -5,6 +5,7 @@ import { resetCart } from "../../slices/cartSlice";
 import { setUser } from "../../slices/profileSlice";
 import { apiConnector } from "../apiconnector";
 import { endpoints } from "../apis";
+import { useNavigate } from "react-router-dom";
 
 const {
   SENDOTP_API,
@@ -120,15 +121,17 @@ export function login(email, password, navigate) {
   };
 }
 
-export function logout(navigate) {
+export function logout(navigate, message) {
   return (dispatch) => {
     dispatch(setToken(null));
     dispatch(setUser(null));
     dispatch(resetCart());
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    toast.success("Logged Out");
-    navigate("/");
+    toast.success(message);
+    if (typeof navigate === "function") {
+      navigate("/login"); // ✅ Navigate to login page
+    }
   };
 }
 

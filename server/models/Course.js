@@ -38,8 +38,8 @@ const CourseSchema = new mongoose.Schema({
     type: String,
   },
   tag: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Tag",
+    type: [String],
+    required: true,
   },
   category: {
     type: mongoose.Types.ObjectId,
@@ -58,6 +58,10 @@ const CourseSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: ["Draft", "Published"],
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 

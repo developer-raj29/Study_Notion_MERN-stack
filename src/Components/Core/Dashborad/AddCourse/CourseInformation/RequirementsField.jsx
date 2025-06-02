@@ -1,43 +1,43 @@
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-export default function RequirementsField({
+const RequirementsField = ({
   name,
   label,
   register,
   setValue,
   errors,
   getValues,
-}) {
-  const { editCourse, course } = useSelector((state) => state.course)
-  const [requirement, setRequirement] = useState("")
-  const [requirementsList, setRequirementsList] = useState([])
+}) => {
+  const { editCourse, course } = useSelector((state) => state.course);
+  const [requirement, setRequirement] = useState("");
+  const [requirementsList, setRequirementsList] = useState([]);
 
   useEffect(() => {
     if (editCourse) {
-      setRequirementsList(course?.instructions)
+      setRequirementsList(course?.instructions);
     }
-    register(name, { required: true, validate: (value) => value.length > 0 })
+    register(name, { required: true, validate: (value) => value.length > 0 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   useEffect(() => {
-    setValue(name, requirementsList)
+    setValue(name, requirementsList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [requirementsList])
+  }, [requirementsList]);
 
   const handleAddRequirement = () => {
     if (requirement) {
-      setRequirementsList([...requirementsList, requirement])
-      setRequirement("")
+      setRequirementsList([...requirementsList, requirement]);
+      setRequirement("");
     }
-  }
+  };
 
   const handleRemoveRequirement = (index) => {
-    const updatedRequirements = [...requirementsList]
-    updatedRequirements.splice(index, 1)
-    setRequirementsList(updatedRequirements)
-  }
+    const updatedRequirements = [...requirementsList];
+    updatedRequirements.splice(index, 1);
+    setRequirementsList(updatedRequirements);
+  };
 
   return (
     <div className="flex flex-col space-y-2">
@@ -82,5 +82,7 @@ export default function RequirementsField({
         </span>
       )}
     </div>
-  )
-}
+  );
+};
+
+export default RequirementsField;
