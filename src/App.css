@@ -244,3 +244,25 @@ details > summary::-webkit-details-marker {
 .section_heading {
   @apply text-2xl font-bold text-richblack-5 lg:text-4xl;
 }
+
+.maindiv {
+  color: #fff;
+  box-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 2px #fff, 0 0 2px #0ba9ca,
+    0 0 10px #0ba9ca, 0 0 1px #0ba9ca;
+  -webkit-animation: blink 0.7s infinite alternate;
+  animation: blink 2s infinite alternate;
+}
+
+@-webkit-keyframes blink {
+  100% {
+    box-shadow: 0 0 1px #fff, 0 0 10px #fff, 0 0 10px #fff, 0 0 20px #0ba9ca,
+      0 0 40px #0ba9ca, 0 0 5px #0ba9ca;
+  }
+}
+
+@keyframes blink {
+  100% {
+    box-shadow: 0 0 1px #fff, 0 0 10px #fff, 0 0 1px #fff, 0 0 2px #0ba9ca,
+      0 0 10px #0ba9ca, 0 0 30px #0ba9ca;
+  }
+}

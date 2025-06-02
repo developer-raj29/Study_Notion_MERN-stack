@@ -2,23 +2,23 @@ export const FooterLink2 = [
   {
     title: "Subjects",
     links: [
-      { title: "Al", link: "/al" },
-      { title: "Cloud Computing", link: "/cloud-computing" },
+      { title: "AI", link: "/catalog/ai" },
+      { title: "Cloud Computing", link: "/catalog/cloud-computing" },
       { title: "Code Foundations", link: "/code-foundations" },
-      { title: "Computer Science", link: "/computer-science" },
-      { title: "Cybersecurity", link: "/cybersecurity" },
+      { title: "Computer Science", link: "/catalog/computer-science" },
+      { title: "Cybersecurity", link: "/catalog/cybersecurity" },
       { title: "Data Analytics", link: "/data-analytics" },
-      { title: "Data Science", link: "/data-science" },
-      { title: "Data Visualization", link: "/data-visualization" },
-      { title: "Developer Tools", link: "/developer-tools" },
-      { title: "DevOps", link: "/devops" },
-      { title: "Game Development", link: "/game-development" },
+      { title: "Data Science", link: "/catalog/data-science" },
+      { title: "Data Visualization", link: "/catalog/data-visualization" },
+      { title: "Developer Tools", link: "/catalog/developer-tools" },
+      { title: "DevOps", link: "/catalog/devops" },
+      { title: "Game Development", link: "/catalog/game-development" },
       { title: "IT", link: "/it" },
-      { title: "Machine Learning", link: "/machine-learning" },
+      { title: "Machine Learning", link: "/catalog/machine-learning" },
       { title: "Math", link: "/math" },
-      { title: "Mobile Development", link: "/mobile-development" },
-      { title: "Web Design", link: "/web-design" },
-      { title: "Web Development", link: "/web-development" },
+      { title: "Mobile Development", link: "/catalog/mobile-development" },
+      { title: "Web Design", link: "/catalog/web-design" },
+      { title: "Web Development", link: "/catalog/web-development" },
     ],
   },
   {
@@ -43,13 +43,16 @@ export const FooterLink2 = [
   {
     title: "Career building",
     links: [
-        {title: "Career paths", link: "/career-paths"},
-        {title: "Career services", link: "/career-services"},
-        {title: "Interview prep", link: "/interview-prep"},
-        {title: "Professional certification", link: "/professional-certification"},
-        {title: "-", link: "/hi"},
-        {title: "Full Catalog", link: "/full-catalog"},
-        {title: "Beta Content", link: "/beta-content"}
-    ]
-  }
+      { title: "Career paths", link: "/career-paths" },
+      { title: "Career services", link: "/career-services" },
+      { title: "Interview prep", link: "/interview-prep" },
+      {
+        title: "Professional certification",
+        link: "/professional-certification",
+      },
+      // { title: "-", link: "/hi" },
+      { title: "Full Catalog", link: "/full-catalog" },
+      { title: "Beta Content", link: "/beta-content" },
+    ],
+  },
 ];

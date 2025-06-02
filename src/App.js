@@ -39,33 +39,6 @@ const App = () => {
 
   // console.log("user: ", user, "token: ", token);
 
-  // useEffect(() => {
-  //   if (token === null) {
-  //     logout("/login");
-  //   }
-  // }, [token]);
-
-  // useEffect(() => {
-  //   if (token) {
-  //     const decoded = jwtDecode(token);
-  //     const currentTime = Math.floor(Date.now() / 1000);
-  //     const remainingTime = decoded.exp - currentTime;
-
-  //     if (remainingTime > 0) {
-  //       const timer = setTimeout(() => {
-  //         console.log(remainingTime);
-  //         logout("/login");
-  //         localStorage.removeItem("token");
-  //       }, remainingTime * 1000); // convert to milliseconds
-
-  //       return () => clearTimeout(timer); // cleanup on unmount
-  //     } else {
-  //       logout("/login");
-  //       localStorage.removeItem("token");
-  //     }
-  //   }
-  // }, [token]);
-
   return (
     <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
       <Navbar isloggedIn={isloggedIn} setIsLoggedIn={setIsLoggedIn} />
@@ -76,10 +49,6 @@ const App = () => {
 
         <Route path="/catalog/:catalogName" element={<Catalog />} />
         <Route path="/courses/:courseId" element={<CourseDetails />} />
-
-        {/* <OpenRoute>
-
-        </OpenRoute> */}
 
         <Route
           path="/login"
