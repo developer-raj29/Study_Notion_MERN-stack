@@ -106,59 +106,6 @@ const CourseBuilderForm = () => {
   };
 
   return (
-    // <div className="text-white">
-    //   <p>Course Builder</p>
-    //   <form onSubmit={handleSubmit(onSubmit)}>
-    //     <div>
-    //       <label htmlFor="sectionName">
-    //         Section name <sup>*</sup>
-    //       </label>
-    //       <input
-    //         id="sectionName"
-    //         placeholder="Add section name"
-    //         {...register("sectionName", { required: true })}
-    //         className="w-full"
-    //       />
-    //       {errors.sectionName && <span>Section Name is required</span>}
-    //     </div>
-    //     <div className="mt-10 flex w-full">
-    //       <IconBtn
-    //         type="Submit"
-    //         text={editSectionName ? "Edit Section Name" : "Create Section"}
-    //         outline={true}
-    //         customClasses={"text-white"}
-    //       >
-    //         <MdAddCircleOutline className="text-yellow-50" size={20} />
-    //       </IconBtn>
-    //       {editSectionName && (
-    //         <button
-    //           type="button"
-    //           onClick={cancelEdit}
-    //           className="text-sm text-richblack-300 underline ml-10"
-    //         >
-    //           Cancel Edit
-    //         </button>
-    //       )}
-    //     </div>
-    //   </form>
-
-    //   {course?.courseContent?.length > 0 && (
-    //     <NestedView handleChangeEditSectionName={handleChangeEditSectionName} />
-    //   )}
-
-    //   <div className="flex justify-end gap-x-3 mt-10">
-    //     <button
-    //       onClick={goBack}
-    //       className="rounded-md cursor-pointer flex items-center "
-    //     >
-    //       Back
-    //     </button>
-    //     <IconBtn disabled={loading} text="Next" onclick={goToNext}>
-    //       <MdNavigateNext />
-    //     </IconBtn>
-    //   </div>
-    // </div>
-
     <div className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6">
       <p className="text-2xl font-semibold text-richblack-5">Course Builder</p>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

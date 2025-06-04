@@ -106,7 +106,7 @@ const CourseInformationForm = () => {
         if (currentValues.courseBenefits !== course.whatYouWillLearn) {
           formData.append("whatYouWillLearn", data.courseBenefits);
         }
-        if (currentValues.courseCategory !== course.category._id) {
+        if (currentValues.courseCategory._id !== course.category._id) {
           formData.append("category", data.courseCategory);
         }
         if (

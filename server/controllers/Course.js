@@ -176,10 +176,26 @@ exports.editCourse = async (req, res) => {
     }
 
     // Update only the fields that are present in the request body
+    // for (const key in updates) {
+    //   if (updates.hasOwnProperty(key)) {
+    //     if (key === "tag" || key === "instructions") {
+    //       course[key] = JSON.parse(updates[key]);
+    //     } else {
+    //       course[key] = updates[key];
+    //     }
+    //   }
+    // }
+
     for (const key in updates) {
       if (updates.hasOwnProperty(key)) {
         if (key === "tag" || key === "instructions") {
           course[key] = JSON.parse(updates[key]);
+        } else if (
+          key === "category" &&
+          typeof updates[key] === "object" &&
+          updates[key]?._id
+        ) {
+          course[key] = updates[key]._id; // ✅ Extract only ObjectId
         } else {
           course[key] = updates[key];
         }

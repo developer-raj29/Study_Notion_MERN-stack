@@ -90,6 +90,57 @@ exports.updateSection = async (req, res) => {
   }
 };
 
+exports.updateSection = async (req, res) => {
+  try {
+    const { sectionName, sectionId, courseId } = req.body;
+
+    // data validation
+    if (!sectionName || !sectionId) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required",
+      });
+    }
+
+    const section = await Section.findById(sectionId);
+    if (!section) {
+      return res.status(404).json({
+        success: false,
+        message: "Section not found",
+      });
+    }
+    section.sectionName = sectionName;
+    await section.save();
+
+    // const section = await Section.findByIdAndUpdate(
+    //   sectionId,
+    //   { sectionName },
+    //   { new: true }
+    // );
+
+    const course = await Course.findById(courseId)
+      .populate({
+        path: "courseContent",
+        populate: {
+          path: "subSection",
+        },
+      })
+      .exec();
+
+    res.status(200).json({
+      success: true,
+      message: section,
+      data: course,
+    });
+  } catch (error) {
+    console.error("Error updating section:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
 // DELETE SECTION
 
 exports.deleteSection = async (req, res) => {

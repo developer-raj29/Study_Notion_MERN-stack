@@ -18,18 +18,19 @@ const ChipInput = ({
   const { editCourse, course } = useSelector((state) => state.course);
 
   console.log("Edit Course: ", editCourse);
-  console.log("Course: ", course);
+  // console.log("Course: ", course.tag);
+  // console.log("getValues: ", getValues);
 
   // Setting up state for managing chips array
   const [chips, setChips] = useState([]);
 
-  console.log("chips Course: ", chips);
+  // console.log("chips Course: ", chips);
 
   useEffect(() => {
     if (editCourse) {
       // console.log(course)
       // Its pending to set the chips and course?.tag is not working properly, I will fix it later.
-      // setChips(course?.tag);
+      setChips(course?.tag);
     }
     register(name, { required: true, validate: (value) => value.length > 0 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,23 +76,24 @@ const ChipInput = ({
       {/* Render the chips and input */}
       <div className="flex w-full flex-wrap gap-y-2">
         {/* Map over the chips array and render each chip */}
-        {chips.map((chip, index) => (
-          <div
-            key={index}
-            className="m-1 flex items-center rounded-full bg-yellow-400 px-2 py-1 text-sm text-richblack-5"
-          >
-            {/* Render the chip value */}
-            {chip}
-            {/* Render the button to delete the chip */}
-            <button
-              type="button"
-              className="ml-2 focus:outline-none"
-              onClick={() => handleDeleteChip(index)}
+        {Array.isArray(chips) &&
+          chips.map((chip, index) => (
+            <div
+              key={index}
+              className="m-1 flex items-center rounded-full bg-yellow-400 px-2 py-1 text-sm text-richblack-5"
             >
-              <MdClose className="text-sm" />
-            </button>
-          </div>
-        ))}
+              {/* Render the chip value */}
+              {chip}
+              {/* Render the button to delete the chip */}
+              <button
+                type="button"
+                className="ml-2 focus:outline-none"
+                onClick={() => handleDeleteChip(index)}
+              >
+                <MdClose className="text-sm" />
+              </button>
+            </div>
+          ))}
         {/* Render the input for adding new chips */}
         <input
           id={name}

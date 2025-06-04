@@ -1,0 +1,869 @@
+[
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000000"
+      },
+      "courseName": "AI for Beginners",
+      "courseDescription": "An introductory course on AI, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of AI, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to AI.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000100"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 499,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/ai_thumb.png",
+      "tag": ["AI", "AI"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000100"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000200"
+        }
+      ],
+      "sectionName": "AI Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000200"
+      },
+      "title": "Introduction to AI",
+      "timeDuration": "200.00",
+      "description": "Overview of what AI is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/ai_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000001"
+      },
+      "courseName": "Cloud Computing for Beginners",
+      "courseDescription": "An introductory course on Cloud Computing, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Cloud Computing, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Cloud Computing.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000101"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 509,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/cloud_thumb.png",
+      "tag": ["Cloud Computing", "Cloud"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000101"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000201"
+        }
+      ],
+      "sectionName": "Cloud Computing Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000201"
+      },
+      "title": "Introduction to Cloud Computing",
+      "timeDuration": "205.00",
+      "description": "Overview of what Cloud Computing is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/cloud_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000002"
+      },
+      "courseName": "Code Foundations for Beginners",
+      "courseDescription": "An introductory course on Code Foundations, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Code Foundations, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Code Foundations.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000102"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 519,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/code_thumb.png",
+      "tag": ["Code Foundations", "Code"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000102"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000202"
+        }
+      ],
+      "sectionName": "Code Foundations Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000202"
+      },
+      "title": "Introduction to Code Foundations",
+      "timeDuration": "210.00",
+      "description": "Overview of what Code Foundations is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/code_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000003"
+      },
+      "courseName": "Computer Science for Beginners",
+      "courseDescription": "An introductory course on Computer Science, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Computer Science, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Computer Science.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000103"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 529,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/computer_thumb.png",
+      "tag": ["Computer Science", "Computer"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000103"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000203"
+        }
+      ],
+      "sectionName": "Computer Science Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000203"
+      },
+      "title": "Introduction to Computer Science",
+      "timeDuration": "215.00",
+      "description": "Overview of what Computer Science is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/computer_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000004"
+      },
+      "courseName": "Cybersecurity for Beginners",
+      "courseDescription": "An introductory course on Cybersecurity, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Cybersecurity, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Cybersecurity.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000104"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 539,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/cybersecurity_thumb.png",
+      "tag": ["Cybersecurity", "Cybersecurity"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000104"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000204"
+        }
+      ],
+      "sectionName": "Cybersecurity Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000204"
+      },
+      "title": "Introduction to Cybersecurity",
+      "timeDuration": "220.00",
+      "description": "Overview of what Cybersecurity is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/cybersecurity_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000005"
+      },
+      "courseName": "Data Analytics for Beginners",
+      "courseDescription": "An introductory course on Data Analytics, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Data Analytics, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Data Analytics.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000105"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 549,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/data_thumb.png",
+      "tag": ["Data Analytics", "Data"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000105"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000205"
+        }
+      ],
+      "sectionName": "Data Analytics Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000205"
+      },
+      "title": "Introduction to Data Analytics",
+      "timeDuration": "225.00",
+      "description": "Overview of what Data Analytics is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/data_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000006"
+      },
+      "courseName": "Data Science for Beginners",
+      "courseDescription": "An introductory course on Data Science, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Data Science, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Data Science.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000106"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 559,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/data_thumb.png",
+      "tag": ["Data Science", "Data"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000106"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000206"
+        }
+      ],
+      "sectionName": "Data Science Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000206"
+      },
+      "title": "Introduction to Data Science",
+      "timeDuration": "230.00",
+      "description": "Overview of what Data Science is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/data_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000007"
+      },
+      "courseName": "Data Visualization for Beginners",
+      "courseDescription": "An introductory course on Data Visualization, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Data Visualization, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Data Visualization.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000107"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 569,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/data_thumb.png",
+      "tag": ["Data Visualization", "Data"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000107"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000207"
+        }
+      ],
+      "sectionName": "Data Visualization Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000207"
+      },
+      "title": "Introduction to Data Visualization",
+      "timeDuration": "235.00",
+      "description": "Overview of what Data Visualization is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/data_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000008"
+      },
+      "courseName": "Developer Tools for Beginners",
+      "courseDescription": "An introductory course on Developer Tools, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Developer Tools, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Developer Tools.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000108"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 579,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/developer_thumb.png",
+      "tag": ["Developer Tools", "Developer"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000108"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000208"
+        }
+      ],
+      "sectionName": "Developer Tools Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000208"
+      },
+      "title": "Introduction to Developer Tools",
+      "timeDuration": "240.00",
+      "description": "Overview of what Developer Tools is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/developer_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000009"
+      },
+      "courseName": "DevOps for Beginners",
+      "courseDescription": "An introductory course on DevOps, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of DevOps, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to DevOps.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000109"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 589,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/devops_thumb.png",
+      "tag": ["DevOps", "DevOps"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000109"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000209"
+        }
+      ],
+      "sectionName": "DevOps Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000209"
+      },
+      "title": "Introduction to DevOps",
+      "timeDuration": "245.00",
+      "description": "Overview of what DevOps is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/devops_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000010"
+      },
+      "courseName": "Game Development for Beginners",
+      "courseDescription": "An introductory course on Game Development, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Game Development, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Game Development.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000110"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 599,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/game_thumb.png",
+      "tag": ["Game Development", "Game"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000110"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000210"
+        }
+      ],
+      "sectionName": "Game Development Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000210"
+      },
+      "title": "Introduction to Game Development",
+      "timeDuration": "250.00",
+      "description": "Overview of what Game Development is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/game_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000011"
+      },
+      "courseName": "IT for Beginners",
+      "courseDescription": "An introductory course on IT, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of IT, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to IT.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000111"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 609,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/it_thumb.png",
+      "tag": ["IT", "IT"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000111"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000211"
+        }
+      ],
+      "sectionName": "IT Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000211"
+      },
+      "title": "Introduction to IT",
+      "timeDuration": "255.00",
+      "description": "Overview of what IT is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/it_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000012"
+      },
+      "courseName": "Machine Learning for Beginners",
+      "courseDescription": "An introductory course on Machine Learning, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Machine Learning, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Machine Learning.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000112"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 619,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/machine_thumb.png",
+      "tag": ["Machine Learning", "Machine"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000112"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000212"
+        }
+      ],
+      "sectionName": "Machine Learning Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000212"
+      },
+      "title": "Introduction to Machine Learning",
+      "timeDuration": "260.00",
+      "description": "Overview of what Machine Learning is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/machine_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000013"
+      },
+      "courseName": "Math for Beginners",
+      "courseDescription": "An introductory course on Math, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Math, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Math.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000113"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 629,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/math_thumb.png",
+      "tag": ["Math", "Math"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000113"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000213"
+        }
+      ],
+      "sectionName": "Math Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000213"
+      },
+      "title": "Introduction to Math",
+      "timeDuration": "265.00",
+      "description": "Overview of what Math is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/math_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000014"
+      },
+      "courseName": "Mobile Development for Beginners",
+      "courseDescription": "An introductory course on Mobile Development, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Mobile Development, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Mobile Development.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000114"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 639,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/mobile_thumb.png",
+      "tag": ["Mobile Development", "Mobile"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000114"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000214"
+        }
+      ],
+      "sectionName": "Mobile Development Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000214"
+      },
+      "title": "Introduction to Mobile Development",
+      "timeDuration": "270.00",
+      "description": "Overview of what Mobile Development is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/mobile_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000015"
+      },
+      "courseName": "Web Design for Beginners",
+      "courseDescription": "An introductory course on Web Design, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Web Design, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Web Design.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000115"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 649,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/web_thumb.png",
+      "tag": ["Web Design", "Web"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000115"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000215"
+        }
+      ],
+      "sectionName": "Web Design Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000215"
+      },
+      "title": "Introduction to Web Design",
+      "timeDuration": "275.00",
+      "description": "Overview of what Web Design is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/web_intro.mp4",
+      "__v": 0
+    }
+  },
+  {
+    "course": {
+      "_id": {
+        "$oid": "68400000000000000000016"
+      },
+      "courseName": "Web Development for Beginners",
+      "courseDescription": "An introductory course on Web Development, covering key concepts and practical applications.",
+      "instructor": {
+        "$oid": "67d679231a51994b7b2b1383"
+      },
+      "whatYouWillLearn": "This course provides a foundational understanding of Web Development, perfect for beginners. Through hands-on video content and real-world examples, learners will explore core principles, tools, and workflows related to Web Development.",
+      "courseContent": [
+        {
+          "$oid": "68400000000000000000116"
+        }
+      ],
+      "ratingAndReviews": [],
+      "price": 659,
+      "thumbnail": "https://res.cloudinary.com/demo/image/upload/v1710000000/web_thumb.png",
+      "tag": ["Web Development", "Web"],
+      "category": {
+        "$oid": "67d71b3dbb550ba04861b36d"
+      },
+      "studentsEnrolled": [],
+      "instructions": ["Watch lectures", "Complete exercises", "Take quizzes"],
+      "status": "Published",
+      "__v": 0
+    },
+    "section": {
+      "_id": {
+        "$oid": "68400000000000000000116"
+      },
+      "subSection": [
+        {
+          "$oid": "68400000000000000000216"
+        }
+      ],
+      "sectionName": "Web Development Basics",
+      "__v": 0
+    },
+    "subsection": {
+      "_id": {
+        "$oid": "68400000000000000000216"
+      },
+      "title": "Introduction to Web Development",
+      "timeDuration": "280.00",
+      "description": "Overview of what Web Development is and how it is used.",
+      "videoUrl": "https://res.cloudinary.com/demo/video/upload/v1710000000/web_intro.mp4",
+      "__v": 0
+    }
+  }
+]

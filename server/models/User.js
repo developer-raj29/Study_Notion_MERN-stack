@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema({
     require: true,
     ref: "Profile",
   },
-  course: [
+  courses: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Course",
@@ -52,6 +52,10 @@ const UserSchema = new mongoose.Schema({
       ref: "CourseProgress",
     },
   ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("User", UserSchema);

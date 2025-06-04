@@ -62,7 +62,7 @@ const Home = () => {
             muted
             loop
             autoPlay
-            className="border-r-[25px] border-b-[25px] maindiv"
+            className="border-r-[12px] border-b-[12px] maindiv"
           >
             <source src={Banner} type="video/mp4" />
           </video>

@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
@@ -29,13 +29,11 @@ import Error from "./Pages/Error";
 import VideoDetails from "./Components/Core/ViewCourse/VideoDetails";
 import ViewCourse from "./Pages/ViewCourse";
 import CheckAuth from "./Components/Core/Auth/CheckAuth";
-import { logout } from "./services/operations/authAPI";
-import { jwtDecode } from "jwt-decode";
 
 const App = () => {
   const [isloggedIn, setIsLoggedIn] = useState(false);
   const { user } = useSelector((state) => state.profile);
-  const { token } = useSelector((state) => state.auth);
+  // const { token } = useSelector((state) => state.auth);
 
   // console.log("user: ", user, "token: ", token);
 

@@ -15,7 +15,9 @@ const RequirementsField = ({
 
   useEffect(() => {
     if (editCourse) {
-      setRequirementsList(course?.instructions);
+      setRequirementsList(
+        Array.isArray(course?.instructions) ? course.instructions : []
+      );
     }
     register(name, { required: true, validate: (value) => value.length > 0 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,7 +62,7 @@ const RequirementsField = ({
           Add
         </button>
       </div>
-      {requirementsList.length > 0 && (
+      {Array.isArray(requirementsList) && requirementsList.length > 0 && (
         <ul className="mt-2 list-inside list-disc">
           {requirementsList.map((requirement, index) => (
             <li key={index} className="flex items-center text-richblack-5">
