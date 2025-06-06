@@ -7,7 +7,7 @@ import ReviewSlider from "../Components/common/ReviewSlider";
 const Contact = () => {
   return (
     <div>
-      <div className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white lg:flex-row">
+      <div className="mx-auto mt-28 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white lg:flex-row">
         {/* Contact Details */}
         <div className="lg:w-[40%]">
           <ContactDetails />

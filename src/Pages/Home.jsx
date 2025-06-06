@@ -18,7 +18,7 @@ const Home = () => {
     <div>
       {/* section 1 */}
       <div
-        className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center
+        className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center mt-16
       text-white justify-between"
       >
         <Link to={"/signup"}>

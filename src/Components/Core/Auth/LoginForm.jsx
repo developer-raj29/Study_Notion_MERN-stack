@@ -72,7 +72,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
           placeholder="Enter password"
         />
         <span
-          className="absolute right-3 top-[38px] cursor-pointer"
+          className="absolute right-3 md:top-[38px] top-[34px] cursor-pointer"
           onClick={() => setpassword((prev) => !prev)}
         >
           {showpassword ? (

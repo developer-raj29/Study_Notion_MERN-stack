@@ -14,7 +14,7 @@ import StatsComponent from "../Components/Core/AboutPage/Stats";
 const About = () => {
   return (
     <div>
-      <section className="bg-richblack-700">
+      <section className="bg-richblack-700 mt-5">
         <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-center text-white">
           <header className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]">
             Driving Innovation in Online Education for a

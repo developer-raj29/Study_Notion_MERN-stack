@@ -158,10 +158,7 @@ const VideoDetails = () => {
 
   const handleLectureCompletion = async () => {
     setLoading(true);
-    const res = await markLectureAsComplete(
-      { courseId: courseId, subsectionId: subSectionId },
-      token
-    );
+    const res = await markLectureAsComplete({ courseId, subSectionId }, token);
     if (res) {
       dispatch(updateCompletedLectures(subSectionId));
     }
@@ -169,7 +166,7 @@ const VideoDetails = () => {
   };
 
   return (
-    <div className="flex flex-col gap-5 text-white">
+    <div className="flex flex-col gap-5 text-white mt-8">
       {!videoData ? (
         <img
           src={previewSource}

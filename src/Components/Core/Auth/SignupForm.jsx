@@ -98,7 +98,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
         className="flex flex-col w-full gap-y-4 mt-6"
       >
         {/* First or Last Name */}
-        <div className="flex gap-x-4">
+        <div className="flex md:flex-row flex-col md:gap-x-4 gap-y-4">
           <label className="w-full">
             <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
               First Name<sup className="text-pink-200">*</sup>
@@ -146,7 +146,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
           />
         </label>
 
-        <div className="flex gap-x-4">
+        <div className="flex md:flex-row flex-col md:gap-x-4 gap-y-4">
           {/* createPassword and Confirm Password */}
           <label className="w-full relative">
             <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
@@ -162,7 +162,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
               placeholder="Enter Password"
             />
             <span
-              className="absolute right-3 top-[40px] cursor-pointer"
+              className="absolute right-3 md:top-[40px] top-[35px] cursor-pointer"
               onClick={() => setpassword((prev) => !prev)}
             >
               {showpassword ? (
@@ -187,7 +187,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
               placeholder="Confirm Password"
             />
             <span
-              className="absolute right-3 top-[40px] cursor-pointer"
+              className="absolute right-3 md:top-[40px] top-[35px] cursor-pointer"
               onClick={() => setConpassword((prev) => !prev)}
             >
               {showConpassword ? (

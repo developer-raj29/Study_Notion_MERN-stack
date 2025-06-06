@@ -49,7 +49,7 @@ const Instructor = () => {
       {loading ? (
         <div className="spinner"></div>
       ) : courses.length > 0 ? (
-        <div>
+        <div className="flex flex-col gap-16">
           <div className="my-4 flex flex-col lg:flex-row h-[450px] gap-4">
             {/* Render chart / graph */}
             {totalAmount > 0 || totalStudents > 0 ? (

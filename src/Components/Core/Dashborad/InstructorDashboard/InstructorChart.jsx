@@ -51,6 +51,7 @@ const InstructorChart = ({ courses }) => {
   return (
     <div className="flex flex-1 flex-col gap-y-4 rounded-md bg-richblack-800 p-6">
       <p className="text-lg font-bold text-richblack-5">Visualize</p>
+
       <div className="space-x-4 font-semibold">
         {/* Button to switch to the "students" chart */}
         <button
@@ -75,7 +76,8 @@ const InstructorChart = ({ courses }) => {
           Income
         </button>
       </div>
-      <div className="relative mx-auto aspect-square h-full w-full">
+
+      <div className="relative mx-auto aspect-square h-5/6 w-11/12 ">
         {/* Render the Pie chart based on the selected chart */}
         <Pie
           data={currChart === "students" ? chartDataStudents : chartIncomeData}
