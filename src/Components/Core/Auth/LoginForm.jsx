@@ -7,8 +7,8 @@ import { login } from "../../../services/operations/authAPI";
 
 const LoginForm = ({ setIsLoggedIn }) => {
   const [formData, setformData] = useState({
-    email: "",
-    password: "",
+    email: "" || "dummyuser123@gmail.com",
+    password: "" || "123456789",
   });
 
   const navigate = useNavigate();

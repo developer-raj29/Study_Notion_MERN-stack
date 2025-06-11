@@ -6,47 +6,85 @@ require("dotenv").config();
 const CourseProgress = require("../models/CourseProgess");
 
 // Update profile
-exports.updateProfile = async (req, res) => {
+exports.updateProfile = async (request, response) => {
   try {
-    // get data
-    const { dateOfBirth = "", about = "", contactNumber, gender } = req.body;
+    // Get Data
+    const {
+      firstName = "",
+      lastName = "",
+      dateOfBirth = "",
+      about = "",
+      contactNumber = "",
+      gender = "",
+    } = request.body;
 
-    // get userId
-    const id = req.user.id;
-
-    // validation
-    if (!contactNumber || !gender || !id) {
-      return res.status(400).json({
+    // Get userId
+    const id = request.user.id;
+    // Validation
+    if (
+      !firstName ||
+      !lastName ||
+      !dateOfBirth ||
+      !about ||
+      !contactNumber ||
+      !gender
+    ) {
+      return response.status(401).json({
         success: false,
         message: "All fields are required",
       });
     }
 
-    // find Profile
+    // Find Profile
     const userDetails = await User.findById(id);
-    const profileId = userDetails.additionalDetails;
+    if (!userDetails) {
+      return response.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    const user = await User.findByIdAndUpdate(id, {
+      firstName,
+      lastName,
+    });
+    await user.save();
 
+    // Update the Profile fields
+    const profileId = userDetails.additionalDetails;
     const profileDetails = await Profile.findById(profileId);
 
-    // update profile
+    if (!profileDetails) {
+      return response.status(404).json({
+        success: false,
+        message: "Profile not found for the user",
+      });
+    }
+
     profileDetails.dateOfBirth = dateOfBirth;
     profileDetails.about = about;
     profileDetails.gender = gender;
     profileDetails.contactNumber = contactNumber;
 
+    // Save the updated profile
     await profileDetails.save();
 
-    // return res
-    return res.status(200).json({
+    // Find the updated user details
+    const updatedUserDetails = await User.findById(id)
+      .populate("additionalDetails")
+      .exec();
+
+    // Return response
+    return response.status(200).json({
       success: true,
-      message: "Profile Updated Successfully 👍",
-      profileDetails,
+      message: "Profile updated successfully",
+      updatedUserDetails,
     });
   } catch (error) {
-    return res.status(500).json({
+    console.log(error);
+    return response.status(500).json({
       success: false,
-      message: "Internal server error while updating profile",
       error: error.message,
+      message: "Internal Server Error",
     });
   }
 };
