@@ -105,7 +105,7 @@ exports.capturePayment = async (req, res) => {
     } catch (error) {
       console.error("Error occurred while creating order: ", error);
       return res.json({
-        success: true,
+        success: false,
         message: "Could not initiate order",
         error: error.message,
       });
@@ -145,11 +145,10 @@ exports.verifySignature = async (req, res) => {
       );
 
       if (!enrolledCourse) {
-        console.error("Course not found: ", error);
+        console.error("Course not found");
         return res.status(500).json({
           success: false,
           message: "Course not found",
-          error: error.message,
         });
       }
 
@@ -269,7 +268,7 @@ const enrollStudents = async (courses, userId, res) => {
 
       ///bachhe ko mail send kardo
       const emailResponse = await mailSender(
-        enrollStudents.email,
+        enrolledStudent.email,
         `Successfully Enrolled into ${enrolledCourse.courseName}`,
         courseEnrollmentEmail(
           enrolledCourse.courseName,

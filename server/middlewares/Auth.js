@@ -1,7 +1,5 @@
 const JWT = require("jsonwebtoken");
-require("dotenv").env;
-
-const User = require("../models/User");
+require("dotenv").config();
 
 // auth
 exports.auth = async (req, res, next) => {
@@ -58,7 +56,7 @@ exports.IsStudent = async (req, res, next) => {
     res.status(500).json({
       success: false,
       message: "Used role cannot be verified, please try again",
-      error: err.message,
+      error: error.message,
     });
   }
 };
@@ -78,7 +76,7 @@ exports.IsInstructor = async (req, res, next) => {
     res.status(500).json({
       success: false,
       message: "Used role cannot be verified, please try again",
-      error: err.message,
+      error: error.message,
     });
   }
 };
@@ -98,7 +96,7 @@ exports.Admin = async (req, res, next) => {
     res.status(500).json({
       success: false,
       message: "Used role cannot be verified, please try again",
-      error: err.message,
+      error: error.message,
     });
   }
 };

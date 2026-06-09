@@ -2,6 +2,7 @@ const Profile = require("../models/Profile");
 const User = require("../models/User");
 const Course = require("../models/Course");
 const { convertSecondsToDuration } = require("../utils/secToDuration");
+const { uploadImageToCloudinary } = require("../utils/ImageUploader");
 require("dotenv").config();
 const CourseProgress = require("../models/CourseProgess");
 
@@ -143,7 +144,8 @@ exports.getAllUserDetails = async (req, res) => {
     // return response
     return res.status(200).json({
       success: true,
-      message: "User Details Fetched Successfully ��‍��",
+      message: "User Details Fetched Successfully",
+      data: userDetails,
     });
   } catch (error) {
     return res.status(500).json({

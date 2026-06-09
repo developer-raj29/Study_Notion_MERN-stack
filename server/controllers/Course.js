@@ -17,7 +17,7 @@ exports.createCourse = async (req, res) => {
     const userId = req.user.id;
 
     // Extract fields from the request body
-    const {
+    let {
       courseName,
       courseDescription,
       whatYouWillLearn,
@@ -102,7 +102,7 @@ exports.createCourse = async (req, res) => {
     );
 
     // Create the course
-    const newCourse = await Course({
+    const newCourse = new Course({
       courseName,
       courseDescription,
       instructor: instructorDetails._id,

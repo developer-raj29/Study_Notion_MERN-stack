@@ -51,7 +51,7 @@ exports.createRating = async (req, res) => {
     const updatedCourseDetails = await Course.findByIdAndUpdate(
       { _id: courseId },
       {
-        $push: { ratingsAndReviews: newRatingAndReview._id },
+        $push: { ratingAndReviews: newRatingAndReview._id },
       },
       { new: true }
     );
@@ -132,7 +132,7 @@ exports.getAllRating = async (req, res) => {
       message: "All Rating fetched successfully",
       data: allReviews,
     });
-  } catch {
+  } catch (error) {
     console.error(error);
     res.status(500).json({
       success: false,

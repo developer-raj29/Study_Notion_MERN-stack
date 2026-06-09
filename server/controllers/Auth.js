@@ -3,8 +3,6 @@ const OTP = require("../models/OTP");
 const bcrypt = require("bcrypt");
 const otpGenerator = require("otp-generator");
 const JWT = require("jsonwebtoken");
-const mailSender = require("../utils/MailSender");
-const { passwordUpdate } = require("../mail/templates/passwordUpdate");
 const Profile = require("../models/Profile");
 
 require("dotenv").config();
@@ -124,13 +122,13 @@ exports.signup = async (req, res) => {
 
     // find most recent otp stored for the user
     const recentOTP = await OTP.findOne({ email })
-      .sort({ createAt: -1 })
+      .sort({ createdAt: -1 })
       .limit(1);
 
     console.log("Recent OTP : ", recentOTP);
 
     // validate otp
-    if (recentOTP.length == 0) {
+    if (!recentOTP) {
       // OTP Not Found
       return res.status(400).json({
         success: false,
@@ -206,7 +204,7 @@ exports.login = async (req, res) => {
     }
 
     // generate JWT, after password matching
-    if (bcrypt.compare(password, user.password)) {
+    if (await bcrypt.compare(password, user.password)) {
       const payload = {
         email: user.email,
         id: user._id,

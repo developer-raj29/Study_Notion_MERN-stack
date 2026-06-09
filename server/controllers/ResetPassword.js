@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const MailSender = require("../utils/MailSender");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 
 // reset Password
 exports.ResetPasswordToken = async (req, res) => {
@@ -9,7 +10,7 @@ exports.ResetPasswordToken = async (req, res) => {
     const email = req.body.email;
 
     // check uesr for this email , email address
-    const user = await Uses.findOne({ email: email });
+    const user = await User.findOne({ email: email });
 
     if (!user) {
       return res.status(400).json({
