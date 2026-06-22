@@ -15,6 +15,8 @@ const {
 } = require("../mail/templates/paymentSuccessEmail");
 
 const CourseProgress = require("../models/CourseProgess");
+const AnalyticsService = require("../services/analyticsService");
+const LearningRoadmap = require("../models/LearningRoadmap");
 
 // capture the payment and initiate the Razory order
 exports.capturePayment = async (req, res) => {
@@ -163,6 +165,24 @@ exports.verifySignature = async (req, res) => {
 
       console.log(enrolledStudent);
 
+      // Track analytics course_purchased event (Phase 8)
+      try {
+        const matchingRoadmap = await LearningRoadmap.findOne({
+          userId: userId,
+          "suggestedCourses.course": courseId,
+        });
+        if (matchingRoadmap) {
+          await AnalyticsService.trackEvent({
+            event: "course_purchased",
+            roadmapId: matchingRoadmap._id,
+            userId: userId,
+            courseId: courseId,
+          });
+        }
+      } catch (analyticsErr) {
+        console.warn("[Analytics] Failed to track course purchase in webhook:", analyticsErr.message);
+      }
+
       // mail send krdo confirmation wala
       const emailResponse = await mailSender(
         enrolledStudent.email,
@@ -276,6 +296,24 @@ const enrollStudents = async (courses, userId, res) => {
         )
       );
       console.log("Email Sent Successfully", emailResponse);
+
+      // Track analytics course_purchased event (Phase 8)
+      try {
+        const matchingRoadmap = await LearningRoadmap.findOne({
+          userId: userId,
+          "suggestedCourses.course": courseId,
+        });
+        if (matchingRoadmap) {
+          await AnalyticsService.trackEvent({
+            event: "course_purchased",
+            roadmapId: matchingRoadmap._id,
+            userId: userId,
+            courseId: courseId,
+          });
+        }
+      } catch (analyticsErr) {
+        console.warn("[Analytics] Failed to track course purchase in enrollStudents:", analyticsErr.message);
+      }
     } catch (error) {
       console.log(error);
       return res.status(500).json({ success: false, message: error.message });
