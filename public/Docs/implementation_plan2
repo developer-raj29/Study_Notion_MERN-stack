@@ -1,0 +1,111 @@
+# StudyNotion AI Roadmap + Course Recommendation System
+
+We will implement a production-ready AI Roadmap + Internal Course Recommendation system. This will transform the generated roadmaps into a business growth engine by suggesting instructor-created courses directly matching the student's selected learning path.
+
+---
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Database Schema Changes:** The `suggestedCourses` field in `LearningRoadmap` will be migrated from `[ObjectId]` to `[{ course: ObjectId, relevanceScore: Number }]`. To prevent breakage of existing user roadmaps, we have designed a **live migration utility** that automatically updates old documents on startup and handles both formats gracefully in repositories.
+
+---
+
+## Proposed Changes
+
+We will implement the system across 9 logical phases.
+
+### Phase 1: Existing Course Structure Analysis (Completed)
+- **Course & Category Status:** Checked schemas. Courses have `status: "Published"` or `status: "Draft"`. We will ensure only `Published` courses are queried.
+- **Instructors:** Course references `instructor` (User). We will populate instructor data in queries.
+- **Learning Roadmap Schema:** `LearningRoadmap.js` references courses directly. We will extend this schema.
+
+### Phase 2: Course Matching Engine [NEW]
+#### [NEW] [courseRecommendationService.js](file:///d:/Working%20Projects/Study_Notion_MERN-stack/server/services/courseRecommendationService.js)
+Create a programmatic recommendation engine matching courses using:
+- `courseName`, `category`, `tag`, `courseDescription`, `whatYouWillLearn`.
+- **Semantic Synonym & Relation Map:** Predefine technical mappings (e.g. `React` is related to `Redux`, `Next.js`, `JavaScript`, etc.) to calculate realistic matching percentages.
+- **Scoring Algorithm:**
+  - Direct exact string/token matches on course name get **80% - 96%** relevance.
+  - Related tech terms from mapping get **70% - 95%** relevance.
+  - Category, tags, description keyword overlaps get **30% - 69%**.
+- **Filters & Constraints:** Score must be `> 70%`, maximum limit of 5 courses, and courses must be `Published`.
+
+### Phase 3: AI Prompt Upgrade
+#### [MODIFY] [AIService.js](file:///d:/Working%20Projects/Study_Notion_MERN-stack/server/services/AIService.js)
+- Upgrade `buildRoadmapPrompt` to incorporate matched internal course list inside the prompt context.
+- Add strict, high-priority system instructions for the LLM to:
+  1. Prefer StudyNotion internal courses.
+  2. Recommend internal courses *before* external resources in milestones.
+  3. Use the exact 24-character hexadecimal MongoDB `courseId`.
+  4. Only fall back to external resources if no suitable internal course matches.
+  5. Keep recommendations natural and educational.
+
+### Phase 4: Extend Roadmap Schema
+#### [MODIFY] [LearningRoadmap.js](file:///d:/Working%20Projects/Study_Notion_MERN-stack/server/models/LearningRoadmap.js)
+Extend `suggestedCourses` field to include relevance score:
+```javascript
+suggestedCourses: [
+  {
+    course: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+      required: true,
+    },
+    relevanceScore: {
+      type: Number,
+      required: true,
+    },
+  },
+]
+```
+#### [MODIFY] [RoadmapRepository.js](file:///d:/Working%20Projects/Study_Notion_MERN-stack/server/repositories/RoadmapRepository.js)
+- Update population fields to nested populate (`suggestedCourses.course` instead of `suggestedCourses`).
+- Handle both old array structure and new object structure to guarantee full backward compatibility.
+- Perform an asynchronous migration on server start to convert old database documents to the new structure automatically.
+
+### Phase 5: AI Resource Structure Upgrade & Validation
+#### [MODIFY] [AIRoadmap.js](file:///d:/Working%20Projects/Study_Notion_MERN-stack/server/controllers/AIRoadmap.js)
+- When generating the roadmap, validate each milestone resource where type is `"course"`.
+- Verify the generated `courseId` is active, published, and exists in the system.
+- If the AI generates an invalid or deleted `courseId`, sanitize the resource (change type to `"article"` or `"video"` and remove `courseId`) to avoid broken links.
+
+### Phase 6 & 7: Frontend Course Recommendation UI
+#### [NEW] [RecommendedForRoadmap.jsx](file:///d:/Working%20Projects/Study_Notion_MERN-stack/src/Components/Core/AIRoadmap/RecommendedForRoadmap.jsx)
+Create a responsive, premium course recommendation UI:
+- **Badge Rules:**
+  - `🔥 Best Match` for match percentage $\ge 95\%$
+  - `⭐ Recommended` for match percentage $\ge 85\%$
+  - `📚 Continue Learning` for match percentage $< 85\%$
+- **Course Card Layout:**
+  - Thumbnail image, Course Name, Instructor, Rating stars (utilizing `GetAvgRating`), enrolled student count, Price & Calculated Discounted Price (15% off).
+  - Match percentage display.
+  - CTA Button: "Enroll Now" (navigates to `/courses/:id`).
+- Proper handling of **Loading Skeleton**, **Error state**, and **Empty state**.
+- Integrate this component in [`RoadmapViewer.jsx`](file:///d:/Working%20Projects/Study_Notion_MERN-stack/src/Components/Core/AIRoadmap/RoadmapViewer.jsx) right after the roadmap summary section.
+
+### Phase 8: Analytics Tracking
+#### [NEW] [RecommendationAnalytics.js](file:///d:/Working%20Projects/Study_Notion_MERN-stack/server/models/RecommendationAnalytics.js)
+Create analytics collection schema:
+- Fields: `event` (enum: `roadmap_generated`, `course_recommended`, `course_clicked`, `course_purchased`), `roadmapId`, `userId`, `courseId`.
+#### [MODIFY] [AIRoadmap.js](file:///d:/Working%20Projects/Study_Notion_MERN-stack/server/controllers/AIRoadmap.js) (Routes & Controller)
+- Log `roadmap_generated` and `course_recommended` when a roadmap is saved.
+- Add `POST /api/v1/ai/analytics/track` endpoint for the frontend to report `course_clicked` events.
+#### [MODIFY] [Payments.js](file:///d:/Working%20Projects/Study_Notion_MERN-stack/server/controllers/Payments.js)
+- In the `enrollStudents` function, when a student successfully enrolls in a course, check if there is an active roadmap suggesting that course, and save a `course_purchased` analytics record.
+
+---
+
+## Verification Plan
+
+### Automated Tests
+- Run backend server and trigger generation API to check response structure.
+- Execute unit tests or database assertions to verify analytics creation.
+
+### Manual Verification
+1. Open the AI Roadmap screen in the browser.
+2. Enter a skill (e.g., "React JS").
+3. Generate roadmap and verify that relevant courses appear inside the milestone steps and in the newly styled "Recommended Courses For You" section.
+4. Verify badges (`🔥 Best Match`, `⭐ Recommended`) are computed and styled correctly.
+5. Click on "Enroll Now" CTA, ensure it redirects to course details page, and verify the `course_clicked` event is recorded in the MongoDB analytics collection.
+6. Complete course enrollment and verify the `course_purchased` event is recorded.
