@@ -5,6 +5,7 @@ const dbConnect = require("../config/database");
 
 const { testRateLimit } = require("./rateLimit.test");
 const { testDatabase } = require("./database.test");
+const { testRecommendationService } = require("./recommendation.test");
 const { testAIService } = require("./aiService.test");
 
 async function runAll() {
@@ -35,7 +36,11 @@ async function runAll() {
     await testDatabase();
     console.log("------------------------------------------");
 
-    // 4. Run AI Service tests (calls Gemini)
+    // 4. Run Course Recommendation Service tests
+    await testRecommendationService();
+    console.log("------------------------------------------");
+
+    // 5. Run AI Service tests (calls Gemini)
     await testAIService();
     console.log("------------------------------------------");
 

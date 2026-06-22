@@ -25,8 +25,4 @@ const getChatModel = () => {
   });
 };
 
-module.exports = {
-  genAI,
-  getRoadmapModel,
-  getChatModel,
-};
+module.exports = { genAI, getRoadmapModel, getChatModel };
