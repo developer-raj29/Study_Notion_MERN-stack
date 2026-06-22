@@ -1,7 +1,6 @@
-import React from 'react'
 import Instructor from "../../../assets/Images/Instructor.png"
 import HighlightText from './HighlightText'
-import { FiArrowDown, FiArrowRight } from 'react-icons/fi'
+import { FiArrowRight } from 'react-icons/fi'
 import CTAButton from "./Button"
 
 export const InstructorSection = () => {
@@ -28,15 +27,15 @@ export const InstructorSection = () => {
                     </p>
 
                     <div className='w-fit'>
-                    <CTAButton active={true} linkto={"/signup"}>
-                        <div className='flex flex-row gap-2 items-center'>
-                            Start Learning Today
-                            <FiArrowRight/>
-                        </div>
-                    </CTAButton>
+                        <CTAButton active={true} linkto={"/signup"}>
+                            <div className='flex flex-row gap-2 items-center'>
+                                Start Learning Today
+                                <FiArrowRight />
+                            </div>
+                        </CTAButton>
                     </div>
 
-            
+
 
                 </div>
 

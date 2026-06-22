@@ -41,4 +41,11 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.STUDENT,
     icon: "VscArchive",
   },
+  {
+    id: 7,
+    name: "AI Roadmap",
+    path: "/dashboard/ai-roadmap",
+    type: ACCOUNT_TYPE.STUDENT,
+    icon: "VscSparkle",
+  },
 ];

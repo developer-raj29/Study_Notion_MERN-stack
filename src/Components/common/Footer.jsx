@@ -22,6 +22,26 @@ const Resources = [
 const Plans = ["Paid memberships", "For students", "Business solutions"];
 const Community = ["Forums", "Chapters", "Events"];
 
+// Helper to determine if a route exists in our App.js
+const VALID_ROUTES = [
+  "/about",
+  "/contact",
+  "/catalog",
+  "/login",
+  "/signup",
+  "/help-center",
+  "/careers",
+  "/career-paths",
+  "/interview-prep",
+  "/professional-certification",
+];
+const isRouteValid = (path) => {
+  if (path.startsWith("http")) return true;
+  if (VALID_ROUTES.includes(path)) return true;
+  if (path.startsWith("/catalog/")) return true;
+  return false;
+};
+
 const Footer = () => {
   return (
     <div className="bg-richblack-800">
@@ -36,12 +56,16 @@ const Footer = () => {
               </h1>
               <div className="flex flex-col gap-2">
                 {["About", "Careers", "Affiliates"].map((ele, i) => {
+                  const path = "/" + ele.toLowerCase();
+                  const valid = isRouteValid(path);
                   return (
                     <div
                       key={i}
-                      className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                      className={`text-[14px] transition-all duration-200 ${
+                        valid ? "cursor-pointer hover:text-richblack-50" : ""
+                      }`}
                     >
-                      <Link to={ele.toLowerCase()}>{ele}</Link>
+                      {valid ? <Link to={path}>{ele}</Link> : ele}
                     </div>
                   );
                 })}
@@ -62,14 +86,16 @@ const Footer = () => {
 
               <div className="flex flex-col gap-2 mt-2">
                 {Resources.map((ele, index) => {
+                  const path = "/" + ele.split(" ").join("-").toLowerCase();
+                  const valid = isRouteValid(path);
                   return (
                     <div
                       key={index}
-                      className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                      className={`text-[14px] transition-all duration-200 ${
+                        valid ? "cursor-pointer hover:text-richblack-50" : ""
+                      }`}
                     >
-                      <Link to={ele.split(" ").join("-").toLowerCase()}>
-                        {ele}
-                      </Link>
+                      {valid ? <Link to={path}>{ele}</Link> : ele}
                     </div>
                   );
                 })}
@@ -79,7 +105,7 @@ const Footer = () => {
                 Support
               </h1>
               <div className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200 mt-2">
-                <Link to={"/help-center"}>Help Center</Link>
+                <Link to="/help-center">Help Center</Link>
               </div>
             </div>
 
@@ -90,14 +116,16 @@ const Footer = () => {
 
               <div className="flex flex-col gap-2 mt-2">
                 {Plans.map((ele, index) => {
+                  const path = "/" + ele.split(" ").join("-").toLowerCase();
+                  const valid = isRouteValid(path);
                   return (
                     <div
                       key={index}
-                      className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                      className={`text-[14px] transition-all duration-200 ${
+                        valid ? "cursor-pointer hover:text-richblack-50" : ""
+                      }`}
                     >
-                      <Link to={ele.split(" ").join("-").toLowerCase()}>
-                        {ele}
-                      </Link>
+                      {valid ? <Link to={path}>{ele}</Link> : ele}
                     </div>
                   );
                 })}
@@ -108,14 +136,16 @@ const Footer = () => {
 
               <div className="flex flex-col gap-2 mt-2">
                 {Community.map((ele, index) => {
+                  const path = "/" + ele.split(" ").join("-").toLowerCase();
+                  const valid = isRouteValid(path);
                   return (
                     <div
                       key={index}
-                      className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                      className={`text-[14px] transition-all duration-200 ${
+                        valid ? "cursor-pointer hover:text-richblack-50" : ""
+                      }`}
                     >
-                      <Link to={ele.split(" ").join("-").toLowerCase()}>
-                        {ele}
-                      </Link>
+                      {valid ? <Link to={path}>{ele}</Link> : ele}
                     </div>
                   );
                 })}
@@ -133,12 +163,26 @@ const Footer = () => {
                   </h1>
                   <div className="flex flex-col gap-2 mt-2">
                     {ele.links.map((link, index) => {
+                      const valid = isRouteValid(link.link);
+                      const isExternal = link.link.startsWith("http");
                       return (
                         <div
                           key={index}
-                          className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
+                          className={`text-[14px] transition-all duration-200 ${
+                            valid ? "cursor-pointer hover:text-richblack-50" : ""
+                          }`}
                         >
-                          <Link to={link.link}>{link.title}</Link>
+                          {valid ? (
+                            isExternal ? (
+                              <a href={link.link} target="_blank" rel="noreferrer">
+                                {link.title}
+                              </a>
+                            ) : (
+                              <Link to={link.link}>{link.title}</Link>
+                            )
+                          ) : (
+                            link.title
+                          )}
                         </div>
                       );
                     })}
@@ -155,18 +199,18 @@ const Footer = () => {
         <div className="flex justify-between lg:items-start items-center flex-col lg:flex-row gap-3 w-full">
           <div className="flex flex-row">
             {BottomFooter.map((ele, i) => {
+              const path = "/" + ele.split(" ").join("-").toLowerCase();
+              const valid = isRouteValid(path);
               return (
                 <div
                   key={i}
                   className={` ${
-                    BottomFooter.length - 1 === i
-                      ? ""
-                      : "border-r border-richblack-700 cursor-pointer hover:text-richblack-50 transition-all duration-200"
-                  } px-3 `}
+                    BottomFooter.length - 1 === i ? "" : "border-r border-richblack-700"
+                  } px-3 transition-all duration-200 ${
+                    valid ? "cursor-pointer hover:text-richblack-50" : ""
+                  }`}
                 >
-                  <Link to={ele.split(" ").join("-").toLocaleLowerCase()}>
-                    {ele}
-                  </Link>
+                  {valid ? <Link to={path}>{ele}</Link> : ele}
                 </div>
               );
             })}

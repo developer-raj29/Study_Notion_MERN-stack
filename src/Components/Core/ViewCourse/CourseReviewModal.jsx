@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import IconBtn from "../../common/IconBtn";
@@ -21,7 +21,7 @@ const CourseReviewModal = ({ setReviewModal }) => {
   useEffect(() => {
     setValue("courseExperience", "");
     setValue("courseRating", 0);
-  }, []);
+  }, [setValue]);
 
   const ratingChanged = (newRating) => {
     setValue("courseRating", newRating);
@@ -85,7 +85,7 @@ const CourseReviewModal = ({ setReviewModal }) => {
                 id="courseExperience"
                 placeholder="Add Your Experience"
                 {...register("courseExperience", { required: true })}
-                className="form-style resize-x-none min-h-[130px] w-full"
+                className="form-style resize-none min-h-[130px] w-full"
               />
               {errors.courseExperience && (
                 <span className="ml-2 text-xs tracking-wide text-pink-200">

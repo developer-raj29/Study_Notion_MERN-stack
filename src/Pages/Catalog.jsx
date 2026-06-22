@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../Components/common/Footer";
 import { useParams } from "react-router-dom";
 import { apiConnector } from "../services/apiconnector";
 import { categories } from "../services/apis";
 import { getCatalogaPageData } from "../services/operations/pageAndComponentData";
-import Course_Card from "../Components/Core/Catalog/Course_Card";
+import CourseCard from "../Components/Core/Catalog/Course_Card";
 import CourseSlider from "../Components/Core/Catalog/CourseSlider";
 import { useSelector } from "react-redux";
 import Error from "./Error";
@@ -15,16 +15,26 @@ const Catalog = () => {
   const [active, setActive] = useState(1);
   const [catalogPageData, setCatalogPageData] = useState(null);
   const [categoryId, setCategoryId] = useState("");
+  const [categoryNotFound, setCategoryNotFound] = useState(false);
 
   //Fetch all categories
   useEffect(() => {
     const getCategories = async () => {
-      const res = await apiConnector("GET", categories.CATEGORIES_API);
-      console.log("res: ", res);
-      const category_id = res?.data?.allCategory?.filter(
-        (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
-      )[0]._id;
-      setCategoryId(category_id);
+      try {
+        const res = await apiConnector("GET", categories.CATEGORIES_API);
+        const category = res?.data?.allCategory?.filter(
+          (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
+        )[0];
+        
+        if (category) {
+          setCategoryId(category._id);
+          setCategoryNotFound(false);
+        } else {
+          setCategoryNotFound(true);
+        }
+      } catch (err) {
+        console.error("Could not fetch categories", err);
+      }
     };
     getCategories();
   }, [catalogName]);
@@ -33,7 +43,6 @@ const Catalog = () => {
     const getCategoryDetails = async () => {
       try {
         const res = await getCatalogaPageData(categoryId);
-        console.log("PRinting res: ", res);
         setCatalogPageData(res);
       } catch (error) {
         console.log(error);
@@ -43,6 +52,10 @@ const Catalog = () => {
       getCategoryDetails();
     }
   }, [categoryId]);
+
+  if (categoryNotFound) {
+    return <Error />;
+  }
 
   if (loading || !catalogPageData) {
     return (
@@ -127,7 +140,7 @@ const Catalog = () => {
             {catalogPageData?.data?.mostSellingCourses
               ?.slice(0, 4)
               .map((course, i) => (
-                <Course_Card course={course} key={i} Height={"h-[400px]"} />
+                <CourseCard course={course} key={i} Height={"h-[400px]"} />
               ))}
           </div>
         </div>

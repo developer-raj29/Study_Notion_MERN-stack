@@ -5,13 +5,14 @@ import CourseSubSectionAccordion from "./CourseSubSectionAccordion";
 
 const CourseAccordionBar = ({ course, isActive, handleActive }) => {
   const contentEl = useRef(null);
+  const [sectionHeight, setSectionHeight] = useState(0);
 
   // Accordian state
   const [active, setActive] = useState(false);
   useEffect(() => {
     setActive(isActive?.includes(course._id));
-  }, [isActive]);
-  const [sectionHeight, setSectionHeight] = useState(0);
+  }, [isActive, course._id]);
+
   useEffect(() => {
     setSectionHeight(active ? contentEl.current.scrollHeight : 0);
   }, [active]);

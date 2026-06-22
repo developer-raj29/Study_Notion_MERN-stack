@@ -37,7 +37,7 @@ const VideoDetailsSidebar = ({ setReviewModal }) => {
       setVideoBarActive(activeSubSectionId);
     };
     setActiveFlags();
-  }, [courseSectionData, courseEntireData, location.pathname]);
+  }, [courseSectionData, courseEntireData, location.pathname, sectionId, subSectionId]);
 
   return (
     <>

@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { buyCourse } from "../services/operations/studentFeaturesAPI";
 import { fetchCourseDetails } from "../services/operations/courseDetailsAPI";
-import { setCourse } from "../slices/courseSlice";
 import GetAvgRating from "../utils/avgRating";
 import Error from "./Error";
-import { formatDate } from "../services/formDate";
+import { formatDate } from "../services/formatDate";
 import CourseDetailsCard from "../Components/Core/Course/CourseDetailsCard";
 import ConfirmationModal from "../Components/common/confirmationModal";
 import RatingStars from "../Components/common/RatingStars";
@@ -63,7 +62,7 @@ const CourseDetails = () => {
     setIsActive(
       !isActive.includes(id)
         ? isActive.concat(id)
-        : isActive.filter((e) => e != id)
+        : isActive.filter((e) => e !== id)
     );
   };
 

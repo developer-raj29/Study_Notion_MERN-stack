@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import { markLectureAsComplete } from "../../../services/operations/courseDetail
 import { updateCompletedLectures } from "../../../slices/viewCourseSlice";
 import IconBtn from "../../common/IconBtn";
 
-const VideoDetails = () => {
+const VideoDetails = memo(() => {
   const { courseId, sectionId, subSectionId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,7 +45,7 @@ const VideoDetails = () => {
         setVideoEnded(false);
       }
     })();
-  }, [courseSectionData, courseEntireData, location.pathname]);
+  }, [courseSectionData, courseEntireData, location.pathname, courseId, sectionId, subSectionId, navigate]);
 
   // check if the lecture is the first video of the course
   const isFirstVideo = () => {
@@ -240,6 +240,6 @@ const VideoDetails = () => {
       <p className="pt-2 pb-6">{videoData?.description}</p>
     </div>
   );
-};
+});
 
 export default VideoDetails;

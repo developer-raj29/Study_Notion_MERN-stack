@@ -10,6 +10,7 @@ import Quote from "../Components/Core/AboutPage/Quote";
 import LearningGrid from "../Components/Core/AboutPage/LearningGrid";
 import ContactFormSection from "../Components/Core/AboutPage/ContactFormSection";
 import StatsComponent from "../Components/Core/AboutPage/Stats";
+import FAQAccordion from "../Components/Core/AboutPage/FAQAccordion";
 
 const About = () => {
   return (
@@ -119,6 +120,9 @@ const About = () => {
         </h1>
         <ReviewSlider />
       </div>
+
+      {/* FAQ Accordion component */}
+      <FAQAccordion />
       <Footer />
     </div>
   );

@@ -25,28 +25,3 @@ const Tab = ({ tabData, field, setField }) => {
 
 export default Tab;
 
-{
-  /* student instructor tag
-      <div className="flex bg-richblack-800 p-1 gap-x-1 my-6 rounded-full max-w-max">
-        <button
-          className={`${
-            accountType === "Student"
-              ? "bg-richblack-900 text-richblack-5"
-              : "bg-transparent text-richblack-200"
-          } py-2 px-5 rounded-full transition-all duration-400`}
-          onClick={() => setAccountType("Student")}
-        >
-          Student
-        </button>
-        <button
-          className={`${
-            accountType === "Instructor"
-              ? "bg-richblack-900 text-richblack-5"
-              : "bg-transparent text-richblack-200"
-          } py-2 px-5 rounded-full transition-all duration-400`}
-          onClick={() => setAccountType("Instructor")}
-        >
-          Instructor
-        </button>
-      </div> */
-}

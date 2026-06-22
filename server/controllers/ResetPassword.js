@@ -30,7 +30,7 @@ exports.ResetPasswordToken = async (req, res) => {
     );
 
     // create url
-    const url = `http://localhost:3000/update-password/${token}`;
+    const url = `${process.env.FRONTEND_URL}/update-password/${token}`;
 
     // send email containing the url
     await MailSender(
@@ -59,10 +59,10 @@ exports.ResetPasswordToken = async (req, res) => {
 exports.ResetPassword = async (req, res) => {
   try {
     // data fetched
-    const { password, confrimPassword, token } = req.body;
+    const { password, confirmPassword, token } = req.body;
 
     // validation
-    if (password !== confrimPassword) {
+    if (password !== confirmPassword) {
       return res.status(401).json({
         success: false,
         message: "Passwords not matching",

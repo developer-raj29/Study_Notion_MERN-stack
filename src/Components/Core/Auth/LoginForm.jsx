@@ -7,8 +7,8 @@ import { login } from "../../../services/operations/authAPI";
 
 const LoginForm = ({ setIsLoggedIn }) => {
   const [formData, setformData] = useState({
-    email: "" || "dummyuser123@gmail.com",
-    password: "" || "123456789",
+    email: "" || "rohan.mehta@studynotion.com",
+    password: "" || "Password@1234",
   });
 
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
       return;
     }
 
-    console.log("Login Details: ", formData);
+    // console.log("Login Details: ", formData);
 
     dispatch(login(email, password, navigate));
   };
@@ -82,7 +82,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
           )}
         </span>
 
-        <Link to="#">
+        <Link to="/forgot-password">
           <p className="text-right text-xs mt-1 text-blue-100">
             Forget Password
           </p>
