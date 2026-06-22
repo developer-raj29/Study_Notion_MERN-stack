@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { VscArchive } from "react-icons/vsc";
 
 import RenderCartCourses from "./RenderCartCourses";
 import RenderTotalAmount from "./RenderTotalAmount";
@@ -8,7 +9,10 @@ const Cart = () => {
 
   return (
     <>
-      <h1 className="mb-14 text-3xl font-medium text-richblack-5">Cart</h1>
+      <h1 className="mb-6 text-3xl font-medium text-richblack-5 flex items-center gap-2">
+        <VscArchive className="text-yellow-50" />
+        Cart
+      </h1>
       <p className="border-b border-b-richblack-400 pb-2 font-semibold text-richblack-400">
         {totalItems} Courses in Cart
       </p>

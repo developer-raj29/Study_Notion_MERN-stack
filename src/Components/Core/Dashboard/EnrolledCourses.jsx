@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
-import { BiDotsVerticalRounded } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { VscBook } from "react-icons/vsc";
 
 import { getUserEnrolledCourses } from "../../../services/operations/profileAPI";
 
@@ -22,11 +22,14 @@ const EnrolledCourses = () => {
   };
   useEffect(() => {
     getEnrolledCourses();
-  }, []);
+  }, [token]);
 
   return (
     <>
-      <div className="text-3xl text-richblack-50">Enrolled Courses</div>
+      <h1 className="mb-6 text-3xl font-medium text-richblack-5 flex items-center gap-2">
+        <VscBook className="text-yellow-50" />
+        Enrolled Courses
+      </h1>
       {!enrolledCourses ? (
         <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
           <div className="spinner"></div>
@@ -40,6 +43,7 @@ const EnrolledCourses = () => {
         <div className="my-8 text-richblack-5">
           {/* Headings */}
           <div className="flex rounded-t-lg bg-richblack-500 ">
+            <p className="w-[10%] px-5 py-3">Sr. No.</p>
             <p className="w-[45%] px-5 py-3">Course Name</p>
             <p className="w-1/4 px-2 py-3">Duration</p>
             <p className="flex-1 px-2 py-3">Progress</p>
@@ -52,6 +56,7 @@ const EnrolledCourses = () => {
               }`}
               key={i}
             >
+              <p className="w-[10%] px-5 py-3 text-richblack-300 font-medium">{i + 1}</p>
               <div
                 className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3"
                 onClick={() => {

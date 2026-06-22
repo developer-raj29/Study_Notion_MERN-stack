@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { useForm } from "react-hook-form";
 import IconBtn from "../../../../common/IconBtn";
-import { MdAddCircleOutline, MdNavigateNext } from "react-icons/md";
-import { BiAddToQueue } from "react-icons/bi";
+import { MdNavigateNext } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { BiRightArrow } from "react-icons/bi";
 import {
   setCourse,
   setEditCourse,
@@ -18,7 +16,7 @@ import {
 import NestedView from "./NestedView";
 import { IoAddCircleOutline } from "react-icons/io5";
 
-const CourseBuilderForm = () => {
+const CourseBuilderForm = memo(() => {
   const {
     register,
     handleSubmit,
@@ -163,6 +161,6 @@ const CourseBuilderForm = () => {
       </div>
     </div>
   );
-};
+});
 
 export default CourseBuilderForm;

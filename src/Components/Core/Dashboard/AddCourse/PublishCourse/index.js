@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useState } from "react";
@@ -20,7 +20,7 @@ const PublishCourse = () => {
     if (course?.status === COURSE_STATUS.PUBLISHED) {
       setValue("public", true);
     }
-  }, []);
+  }, [course?.status, setValue]);
 
   const goBack = () => {
     dispatch(setStep(2));

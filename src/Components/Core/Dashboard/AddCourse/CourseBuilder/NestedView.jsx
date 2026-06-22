@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RxDropdownMenu } from "react-icons/rx";
 import { MdEdit } from "react-icons/md";
@@ -10,7 +10,6 @@ import {
   deleteSection,
   deleteSubSection,
 } from "../../../../../services/operations/courseDetailsAPI";
-import { IoFastFood } from "react-icons/io5";
 import { setCourse } from "../../../../../slices/courseSlice";
 import ConfirmationModal from "../../../../common/confirmationModal";
 
@@ -26,7 +25,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
   const [confirmationModal, setConfirmationModal] = useState(null);
 
   useEffect(() => {
-    console.log("REndering it again");
+    console.log("Rendering it again");
   });
 
   const handleDeleteSection = async (sectionId) => {

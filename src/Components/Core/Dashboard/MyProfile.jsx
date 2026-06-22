@@ -1,6 +1,7 @@
 import { RiEditBoxLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { VscAccount } from "react-icons/vsc";
 
 import { formattedDate } from "../../../utils/dateFormatter";
 import IconBtn from "../../common/IconBtn";
@@ -11,9 +12,11 @@ const MyProfile = () => {
 
   return (
     <>
-      <h1 className="mb-14 text-3xl font-medium text-richblack-5">
+      <h1 className="mb-6 text-3xl font-medium text-richblack-5 flex items-center gap-2">
+        <VscAccount className="text-yellow-50" />
         My Profile
       </h1>
+
       <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
         <div className="flex items-center gap-x-4">
           <img
@@ -37,9 +40,10 @@ const MyProfile = () => {
           <RiEditBoxLine />
         </IconBtn>
       </div>
-      <div className="my-10 flex flex-col gap-y-10 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
+
+      <div className="my-6 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
         <div className="flex w-full items-center justify-between">
-          <p className="text-lg font-semibold text-richblack-5">About</p>
+          <p className="text-xl font-semibold text-richblack-5">About</p>
           <IconBtn
             text="Edit"
             onclick={() => {
@@ -59,9 +63,10 @@ const MyProfile = () => {
           {user?.additionalDetails?.about ?? "Write Something About Yourself"}
         </p>
       </div>
-      <div className="my-10 flex flex-col gap-y-10 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
+
+      <div className="my-6 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
         <div className="flex w-full items-center justify-between">
-          <p className="text-lg font-semibold text-richblack-5">
+          <p className="text-xl font-semibold text-richblack-5">
             Personal Details
           </p>
           <IconBtn

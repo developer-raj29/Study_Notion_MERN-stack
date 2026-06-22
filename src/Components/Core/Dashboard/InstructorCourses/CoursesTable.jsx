@@ -1,16 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Table, Tbody, Td, Th, Thead, Tr } from "react-super-responsive-table";
-
-import { setCourse, setEditCourse } from "../../../../slices/courseSlice";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
-import { useState } from "react";
+import { useState, memo } from "react";
 import { FaCheck } from "react-icons/fa";
 import { FiEdit2 } from "react-icons/fi";
 import { HiClock } from "react-icons/hi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-
-import { formatDate } from "../../../../services/formDate";
+import { formatDate } from "../../../../services/formatDate";
 import {
   deleteCourse,
   fetchInstructorCourses,
@@ -18,8 +15,7 @@ import {
 import { COURSE_STATUS } from "../../../../utils/constants";
 import ConfirmationModal from "../../../common/confirmationModal";
 
-const CoursesTable = ({ courses, setCourses }) => {
-  const dispatch = useDispatch();
+const CoursesTable = memo(({ courses, setCourses }) => {
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
@@ -84,11 +80,11 @@ const CoursesTable = ({ courses, setCourses }) => {
                     </p>
                     <p className="text-xs text-richblack-300">
                       {course.courseDescription.split(" ").length >
-                      TRUNCATE_LENGTH
+                        TRUNCATE_LENGTH
                         ? course.courseDescription
-                            .split(" ")
-                            .slice(0, TRUNCATE_LENGTH)
-                            .join(" ") + "..."
+                          .split(" ")
+                          .slice(0, TRUNCATE_LENGTH)
+                          .join(" ") + "..."
                         : course.courseDescription}
                     </p>
                     <p className="text-[12px] text-white">
@@ -137,10 +133,10 @@ const CoursesTable = ({ courses, setCourses }) => {
                         btn2Text: "Cancel",
                         btn1Handler: !loading
                           ? () => handleCourseDelete(course._id)
-                          : () => {},
+                          : () => { },
                         btn2Handler: !loading
                           ? () => setConfirmationModal(null)
-                          : () => {},
+                          : () => { },
                       });
                     }}
                     title="Delete"
@@ -157,6 +153,6 @@ const CoursesTable = ({ courses, setCourses }) => {
       {confirmationModal && <ConfirmationModal modalData={confirmationModal} />}
     </>
   );
-};
+});
 
 export default CoursesTable;
