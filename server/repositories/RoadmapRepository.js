@@ -156,7 +156,14 @@ exports.findByUser = async (userId) => {
 // Get single roadmap with ownership check and dynamic course progress enrichment
 exports.findById = async (id, userId) => {
   const roadmap = await LearningRoadmap.findOne({ _id: id, userId })
-    .populate("suggestedCourses", "courseName courseDescription thumbnail price ratingAndReviews whatYouWillLearn");
+    .populate({
+      path: "suggestedCourses.course",
+      select: "courseName courseDescription thumbnail price ratingAndReviews whatYouWillLearn studentsEnrolled status instructor",
+      populate: [
+        { path: "instructor", select: "firstName lastName image" },
+        { path: "ratingAndReviews" }
+      ]
+    });
   
   if (!roadmap) return null;
 
@@ -166,7 +173,17 @@ exports.findById = async (id, userId) => {
   const courseIds = [];
 
   if (roadmapObj.suggestedCourses) {
-    roadmapObj.suggestedCourses.forEach((c) => courseIds.push(c._id.toString()));
+    roadmapObj.suggestedCourses.forEach((item) => {
+      if (item && item.course) {
+        courseIds.push(item.course._id.toString());
+      } else if (item) {
+        // Fallback for unmigrated database documents
+        const rawId = item._id ? item._id.toString() : item.toString();
+        if (mongoose.Types.ObjectId.isValid(rawId)) {
+          courseIds.push(rawId);
+        }
+      }
+    });
   }
 
   if (roadmapObj.phases) {
@@ -190,8 +207,14 @@ exports.findById = async (id, userId) => {
 
   // Assign progress percentages back to top-level suggested courses
   if (roadmapObj.suggestedCourses) {
-    roadmapObj.suggestedCourses.forEach((course) => {
-      course.progressPercentage = progressMap[course._id.toString()] || 0;
+    roadmapObj.suggestedCourses.forEach((item) => {
+      if (item && item.course) {
+        item.course.progressPercentage = progressMap[item.course._id.toString()] || 0;
+      } else if (item) {
+        // Fallback for unmigrated database documents
+        const rawId = item._id ? item._id.toString() : item.toString();
+        item.progressPercentage = progressMap[rawId] || 0;
+      }
     });
   }
 
@@ -214,6 +237,37 @@ exports.findById = async (id, userId) => {
 
   return roadmapObj;
 };
+
+// Asynchronous background self-healing migration logic for older schema roadmaps
+async function runSuggestedCoursesMigration() {
+  try {
+    const roadmaps = await LearningRoadmap.find({
+      suggestedCourses: { $exists: true }
+    });
+    for (const rm of roadmaps) {
+      let modified = false;
+      const newSuggested = rm.suggestedCourses.map((item) => {
+        // If the item doesn't have a 'course' property but is a valid raw ObjectId, wrap it
+        if (item && !item.course && mongoose.Types.ObjectId.isValid(item.toString())) {
+          modified = true;
+          return { course: item, relevanceScore: 100 };
+        }
+        return item;
+      }).filter(Boolean);
+
+      if (modified) {
+        rm.suggestedCourses = newSuggested;
+        await rm.save();
+        console.log(`[Migration] Migrated suggestedCourses for roadmap ${rm._id}`);
+      }
+    }
+  } catch (err) {
+    console.error("[Migration] Roadmap suggestedCourses migration failed:", err.message);
+  }
+}
+
+// Run migration asynchronously
+setTimeout(runSuggestedCoursesMigration, 2000);
 
 // Mark milestone complete
 exports.completeMilestone = async (roadmapId, userId, milestoneId) => {

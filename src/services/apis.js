@@ -69,3 +69,14 @@ export const settingsEndpoints = {
   CHANGE_PASSWORD_API: BASE_URL + "/api/v1/auth/changepassword",
   DELETE_PROFILE_API: BASE_URL + "/api/v1/profile/deleteProfile",
 };
+
+// AI LEARNING ROADMAP ENDPOINTS
+export const aiRoadmapEndpoints = {
+  GENERATE_ROADMAP_API: BASE_URL + "/api/v1/ai/generate-roadmap",
+  GET_MY_ROADMAPS_API: BASE_URL + "/api/v1/ai/roadmaps",
+  GET_ROADMAP_DETAILS_API: (id) => `${BASE_URL}/api/v1/ai/roadmaps/${id}`,
+  COMPLETE_MILESTONE_API: (roadmapId, milestoneId) =>
+    `${BASE_URL}/api/v1/ai/roadmaps/${roadmapId}/milestone/${milestoneId}/complete`,
+  CHAT_WITH_ROADMAP_API: (id) => `${BASE_URL}/api/v1/ai/roadmaps/${id}/chat`,
+  TRACK_ANALYTICS_API: BASE_URL + "/api/v1/ai/analytics/track",
+};

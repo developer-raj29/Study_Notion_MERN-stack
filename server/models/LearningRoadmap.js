@@ -62,8 +62,15 @@ const learningRoadmapSchema = new mongoose.Schema(
     chatHistory: [chatMessageSchema],
     suggestedCourses: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Course",
+        course: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Course",
+          required: true,
+        },
+        relevanceScore: {
+          type: Number,
+          required: true,
+        },
       },
     ],
   },

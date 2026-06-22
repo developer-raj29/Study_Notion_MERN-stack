@@ -1,6 +1,8 @@
 const Course = require("../models/Course");
 const AIService = require("../services/AIService");
 const RoadmapRepo = require("../repositories/RoadmapRepository");
+const CourseRecommendationService = require("../services/courseRecommendationService");
+const AnalyticsService = require("../services/analyticsService");
 
 // Reusable helper to parse and format Gemini AI errors into user-friendly notifications
 function getCleanAIErrorMessage(errMessage) {
@@ -45,19 +47,10 @@ exports.generateRoadmap = async (req, res) => {
       });
     }
 
-    // 1. Search the database for published platform courses matching this skill
+    // 1. Search the database for published platform courses matching this skill using CourseRecommendationService
     let availableCourses = [];
     try {
-      availableCourses = await Course.find({
-        status: "Published",
-        $or: [
-          { courseName: { $regex: skillName, $options: "i" } },
-          { courseDescription: { $regex: skillName, $options: "i" } },
-          { tag: { $in: [new RegExp(skillName, "i")] } },
-        ],
-      })
-      .select("courseName courseDescription thumbnail price ratingAndReviews whatYouWillLearn")
-      .limit(5);
+      availableCourses = await CourseRecommendationService.recommendCoursesForSkill(skillName);
     } catch (dbErr) {
       console.warn("Matching courses query failed:", dbErr.message);
     }
@@ -83,13 +76,44 @@ exports.generateRoadmap = async (req, res) => {
       });
     }
 
+    // Validate and sanitize AI-suggested or cached course IDs in milestone resources (Phase 5)
+    if (roadmapStructure.phases) {
+      for (const phase of roadmapStructure.phases) {
+        if (phase.milestones) {
+          for (const milestone of phase.milestones) {
+            if (milestone.resources) {
+              for (const resource of milestone.resources) {
+                if (resource.type === "course" && resource.courseId) {
+                  try {
+                    const courseExists = await Course.findOne({
+                      _id: resource.courseId,
+                      status: "Published",
+                    });
+                    if (!courseExists) {
+                      console.warn(`[Validation] AI suggested invalid or draft course ID: ${resource.courseId}. Sanitizing to article.`);
+                      resource.type = "article";
+                      delete resource.courseId;
+                    }
+                  } catch (err) {
+                    console.warn(`[Validation] Error validating course ID ${resource.courseId}: ${err.message}. Sanitizing to article.`);
+                    resource.type = "article";
+                    delete resource.courseId;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
     // 4. Count total milestones in generated structure
     const totalMilestones = roadmapStructure.phases.reduce(
       (sum, p) => sum + (p.milestones?.length || 0),
       0
     );
 
-    // 5. Save roadmap to Database (mapping matching suggested course IDs)
+    // 5. Save roadmap to Database (mapping matching suggested course IDs + relevance scores)
     const roadmap = await RoadmapRepo.create({
       userId,
       skillName,
@@ -99,10 +123,35 @@ exports.generateRoadmap = async (req, res) => {
       estimatedWeeks: roadmapStructure.estimatedWeeks,
       totalMilestones,
       chatHistory: [],
-      suggestedCourses: availableCourses.map((c) => c._id),
+      suggestedCourses: availableCourses.map((c) => ({
+        course: c._id,
+        relevanceScore: c.relevanceScore,
+      })),
     });
 
-    // Logging analytics event
+    // Save events to Analytics database (Phase 8)
+    try {
+      // Record roadmap generation event
+      await AnalyticsService.trackEvent({
+        event: "roadmap_generated",
+        roadmapId: roadmap._id,
+        userId,
+      });
+
+      // Record recommendation events for each matched course
+      for (const c of availableCourses) {
+        await AnalyticsService.trackEvent({
+          event: "course_recommended",
+          roadmapId: roadmap._id,
+          userId,
+          courseId: c._id,
+        });
+      }
+    } catch (analyticsErr) {
+      console.warn("Tracking generated roadmap analytics failed:", analyticsErr.message);
+    }
+
+    // Logging analytics console event
     console.log(
       JSON.stringify({
         event: "roadmap_generated",
@@ -124,10 +173,47 @@ exports.generateRoadmap = async (req, res) => {
     });
   } catch (err) {
     console.error("[generateRoadmap] Error:", err.message);
+    const isQuota = err.message.toLowerCase().includes("quota") || err.message.includes("429");
+    res.status(isQuota ? 429 : 500).json({
+      success: false,
+      errorCode: isQuota ? "GEMINI_QUOTA_EXCEEDED" : "AI_GENERATION_FAILED",
+      message: getCleanAIErrorMessage(err.message),
+      retryAfter: isQuota ? 36 : 0,
+      fallbackAttempted: true,
+      errorDetails: err.message,
+    });
+  }
+};
+
+// POST /api/v1/ai/analytics/track
+// Allows frontend to track user interactions such as clicking on recommended courses
+exports.trackAnalytics = async (req, res) => {
+  try {
+    const { event, roadmapId, courseId } = req.body;
+    const userId = req.user.id;
+
+    if (!event || !["course_clicked"].includes(event)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or unsupported event type",
+      });
+    }
+
+    await AnalyticsService.trackEvent({
+      event,
+      roadmapId,
+      userId,
+      courseId,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Event tracked successfully",
+    });
+  } catch (err) {
     res.status(500).json({
       success: false,
-      message: getCleanAIErrorMessage(err.message),
-      errorDetails: err.message,
+      message: err.message || "Failed to track analytics event",
     });
   }
 };

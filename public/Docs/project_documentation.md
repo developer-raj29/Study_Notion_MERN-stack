@@ -1,6 +1,6 @@
 # 📚 StudyNotion — Full Project Documentation
 
-> A full-stack EdTech platform built with the MERN stack (MongoDB, Express, React, Node.js) that allows students to buy and watch courses, and instructors to create and manage them.
+> A full-stack EdTech (Education Technology) platform built with the MERN stack (MongoDB, Express, React, Node.js) that allows students to buy and watch courses, and instructors to create and manage them.
 
 ---
 

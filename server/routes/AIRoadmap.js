@@ -13,5 +13,6 @@ router.get("/roadmaps", ctrl.getMyRoadmaps);
 router.get("/roadmaps/:id", ctrl.getRoadmapById);
 router.patch("/roadmaps/:roadmapId/milestone/:milestoneId/complete", ctrl.completeMilestone);
 router.post("/roadmaps/:id/chat", aiLimiter, ctrl.chatWithRoadmap);
+router.post("/analytics/track", ctrl.trackAnalytics);
 
 module.exports = router;
