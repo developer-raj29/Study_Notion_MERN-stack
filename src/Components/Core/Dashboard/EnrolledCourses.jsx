@@ -11,16 +11,16 @@ const EnrolledCourses = () => {
   const navigate = useNavigate();
 
   const [enrolledCourses, setEnrolledCourses] = useState(null);
-  const getEnrolledCourses = async () => {
-    try {
-      const res = await getUserEnrolledCourses(token);
 
-      setEnrolledCourses(res);
-    } catch (error) {
-      console.log("Could not fetch enrolled courses.");
-    }
-  };
   useEffect(() => {
+    const getEnrolledCourses = async () => {
+      try {
+        const res = await getUserEnrolledCourses(token);
+        setEnrolledCourses(res);
+      } catch (error) {
+        console.log("Could not fetch enrolled courses.");
+      }
+    };
     getEnrolledCourses();
   }, [token]);
 

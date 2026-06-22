@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import RatingStars from "../../common/RatingStars";
 import GetAvgRating from "../../../utils/avgRating";
@@ -10,7 +10,7 @@ export default function RecommendedForRoadmap({ activeRoadmap, token }) {
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
 
   useEffect(() => {
     if (activeRoadmap) {

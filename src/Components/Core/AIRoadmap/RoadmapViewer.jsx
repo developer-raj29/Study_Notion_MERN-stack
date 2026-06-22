@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import MilestoneCard from "./MilestoneCard";
 import ProgressBar from "./ProgressBar";
 import ChatPanel from "./ChatPanel";
@@ -8,7 +7,6 @@ import RecommendedForRoadmap from "./RecommendedForRoadmap";
 import { VscChevronDown, VscChevronUp, VscSparkle } from "react-icons/vsc";
 
 export default function RoadmapViewer({ onNewRoadmap }) {
-  const navigate = useNavigate();
   const { activeRoadmap } = useSelector((state) => state.aiRoadmap);
   const { token } = useSelector((state) => state.auth);
 
@@ -22,10 +20,6 @@ export default function RoadmapViewer({ onNewRoadmap }) {
       ...prev,
       [index]: !prev[index],
     }));
-  };
-
-  const handleCourseClick = (courseId) => {
-    navigate(`/courses/${courseId}`);
   };
 
   return (
