@@ -226,7 +226,7 @@ const Navbar = () => {
 
       {/* Mobile Sidebar Sheet / Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-[280px] max-w-[85vw] bg-richblack-900 border-l border-richblack-800 z-[1001] p-6 shadow-2xl transition-transform duration-300 ease-in-out transform lg:hidden flex flex-col justify-between ${
+        className={`fixed top-0 right-0 h-full w-full max-w-xs sm:max-w-md bg-richblack-900 border-l border-richblack-800 z-[1001] p-6 shadow-2xl transition-transform duration-300 ease-in-out transform lg:hidden flex flex-col justify-between ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -322,7 +322,7 @@ const Navbar = () => {
         <div className="flex flex-col gap-y-4 mt-6">
           <div className="h-[1px] bg-richblack-700 w-full" />
           
-          <div className="flex flex-col gap-y-3">
+          <div className="flex flex-col gap-y-6">
             {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
               <Link
                 to="/dashboard/cart"
